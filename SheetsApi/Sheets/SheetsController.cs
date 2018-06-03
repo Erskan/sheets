@@ -48,6 +48,7 @@ namespace SheetsApi.Sheets
             Log.Information("POST sheets/ called from {RemoteIpAddress}.", HttpContext.Connection.RemoteIpAddress);
             if(sheet == null)
             {
+                Log.Information("Null sheet supplied. Returning 400.");
                 return StatusCode(400);
             }
 
@@ -55,10 +56,13 @@ namespace SheetsApi.Sheets
             var validationResult = sheetValidator.Validate(sheet);
             if (!validationResult.IsValid)
             {
+                Log.Information("Validation error in supplied sheet. Returning 400.");
                 return StatusCode(400, validationResult.Errors);
             }
 
-            throw new NotImplementedException();
+            var id = await _sheetService.CreateAsync(sheet);
+            Log.Information("Successfully created sheet {id}", id);
+            return Created($"Successfully created new sheet with id {id}", id);
         }
 
         [HttpPut("{id}")]

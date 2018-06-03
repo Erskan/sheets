@@ -22,5 +22,12 @@ namespace SheetsApi.Sheets
             var sheetModel = await _context.Sheets.FirstOrDefaultAsync(x => x.Id == id);
             return _mapper.Map<Sheet>(sheetModel);
         }
+
+        public async Task<int> CreateAsync(Sheet sheet)
+        {
+            var sheetModel = _mapper.Map<SheetModel>(sheet);
+            var addResult = await _context.Sheets.AddAsync(sheetModel);
+            return addResult.Entity.Id;
+        }
     }
 }

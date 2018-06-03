@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Text;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +12,8 @@ using SheetsApi.Shared;
 using SheetsApi.Shared.Interfaces;
 using SheetsApi.Sheets;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace SheetsApi
 {
@@ -38,6 +42,38 @@ namespace SheetsApi
                 cfg.AddProfile<SheetsMappingProfile>();
             });
             services.AddSingleton<IMapper>(c => mappingConfig.CreateMapper());
+            var jwtOptions = Configuration.GetSection("JwtOptions");
+            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtOptions["SigningKey"]));
+            services.Configure<JwtIssuerOptions>(options =>
+            {
+                options.Issuer = jwtOptions["Issuer"];
+                options.Audience = jwtOptions["Audience"];
+                options.SigningCredentials = new SigningCredentials(
+                    signingKey,
+                    SecurityAlgorithms.HmacSha256);
+            });
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.ClaimsIssuer = jwtOptions["Issuer"];
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = jwtOptions["Issuer"],
+                    ValidateAudience = true,
+                    ValidAudience = jwtOptions["Audience"],
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = signingKey,
+                    RequireExpirationTime = false,
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.Zero
+                };
+                options.SaveToken = true;
+            });
 
             services.AddMvc()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
@@ -58,6 +94,7 @@ namespace SheetsApi
             });
 
             app.UseMiddleware(typeof(ExceptionHandler));
+            app.UseAuthentication();
 
             app.UseMvc();
         }
