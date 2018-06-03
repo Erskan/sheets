@@ -10,16 +10,16 @@ namespace SheetsApi.Sheets
     {
         public SheetValidator()
         {
-            RuleFor(sheet => sheet.Attacks).GreaterThanOrEqualTo(0);
-            RuleFor(sheet => sheet.WeaponSkill).GreaterThanOrEqualTo(0);
-            RuleFor(sheet => sheet.BallisticSkill).GreaterThanOrEqualTo(0);
-            RuleFor(sheet => sheet.InvulnerableSave).GreaterThanOrEqualTo(0);
-            RuleFor(sheet => sheet.Save).GreaterThanOrEqualTo(0);
-            RuleFor(sheet => sheet.Wounds).GreaterThanOrEqualTo(0);
-            RuleFor(sheet => sheet.Leadership).GreaterThanOrEqualTo(0);
-            RuleFor(sheet => sheet.Movement).GreaterThanOrEqualTo(0);
-            RuleFor(sheet => sheet.Strength).GreaterThanOrEqualTo(0);
-            RuleFor(sheet => sheet.Toughness).GreaterThanOrEqualTo(0);
+            RuleFor(sheet => sheet.Attacks).NotNull().GreaterThanOrEqualTo(0);
+            RuleFor(sheet => sheet.WeaponSkill).NotNull().GreaterThanOrEqualTo(0);
+            RuleFor(sheet => sheet.BallisticSkill).NotNull().GreaterThanOrEqualTo(0);
+            RuleFor(sheet => sheet.InvulnerableSave).NotNull().GreaterThanOrEqualTo(0);
+            RuleFor(sheet => sheet.Save).NotNull().GreaterThanOrEqualTo(0);
+            RuleFor(sheet => sheet.Wounds).NotNull().GreaterThanOrEqualTo(0);
+            RuleFor(sheet => sheet.Leadership).NotNull().GreaterThanOrEqualTo(0);
+            RuleFor(sheet => sheet.Movement).NotNull().GreaterThanOrEqualTo(0);
+            RuleFor(sheet => sheet.Strength).NotNull().GreaterThanOrEqualTo(0);
+            RuleFor(sheet => sheet.Toughness).NotNull().GreaterThanOrEqualTo(0);
             RuleFor(sheet => sheet.Name).NotEmpty();
         }
     }

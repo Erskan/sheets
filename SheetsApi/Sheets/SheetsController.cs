@@ -42,7 +42,7 @@ namespace SheetsApi.Sheets
 
         [HttpPost]
         [SwaggerResponse(201, typeof(int))]
-        [SwaggerResponse(400, typeof(FluentValidation.Results.ValidationResult))]
+        [SwaggerResponse(400, typeof(IEnumerable<FluentValidation.Results.ValidationFailure>))]
         public async Task<IActionResult> CreateSheet([FromBody] Sheet sheet)
         {
             Log.Information("POST sheets/ called from {RemoteIpAddress}.", HttpContext.Connection.RemoteIpAddress);
@@ -51,12 +51,11 @@ namespace SheetsApi.Sheets
                 return StatusCode(400);
             }
 
-            // TODO: Fix validation. Currently not validating anything..
-            var validator = new SheetValidator();
-            var validationResult = validator.Validate(sheet);
+            var sheetValidator = new SheetValidator();
+            var validationResult = sheetValidator.Validate(sheet);
             if (!validationResult.IsValid)
             {
-                return StatusCode(400, validationResult);
+                return StatusCode(400, validationResult.Errors);
             }
 
             throw new NotImplementedException();

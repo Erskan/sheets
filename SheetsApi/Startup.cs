@@ -9,6 +9,7 @@ using SheetsApi.Settings;
 using SheetsApi.Shared;
 using SheetsApi.Shared.Interfaces;
 using SheetsApi.Sheets;
+using FluentValidation.AspNetCore;
 
 namespace SheetsApi
 {
@@ -38,7 +39,8 @@ namespace SheetsApi
             });
             services.AddSingleton<IMapper>(c => mappingConfig.CreateMapper());
 
-            services.AddMvc();
+            services.AddMvc()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
