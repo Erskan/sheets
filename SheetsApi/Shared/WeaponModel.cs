@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SheetsApi.Shared
 {
-    public class Weapon
+    public class WeaponModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -12,15 +12,15 @@ namespace SheetsApi.Shared
         public DateTime Modified { get; set; }
         public SheetsUser ModifiedByUser { get; set; }
         public int Range { get; set; }
-        public WeaponType Type { get; set; }
+        public WeaponTypeModel Type { get; set; }
         public int Strength { get; set; }
         public int ArmorPenetration { get; set; }
         public int Damage { get; set; }
-        public IEnumerable<Rule> Rules { get; set; }
+        public IEnumerable<RuleModel> Rules { get; set; }
 
-        public Weapon()
+        public WeaponModel()
         {
-            Rules = new List<Rule>();
+            Rules = new List<RuleModel>();
         }
     }
 }

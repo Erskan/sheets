@@ -2,7 +2,7 @@
 
 namespace SheetsApi.Shared
 {
-    public class Rule
+    public class WeaponTypeModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -10,6 +10,15 @@ namespace SheetsApi.Shared
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
         public SheetsUser ModifiedByUser { get; set; }
-        public string Text { get; set; }
+        public RuleType Type { get; set; }
+        public string Attacks { get; set; }
+
+        public enum RuleType
+        {
+            Assault,
+            Heavy,
+            RapidFire,
+            Melee
+        }
     }
 }

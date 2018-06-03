@@ -22,13 +22,13 @@ namespace SheetsApi.Sheets
         public int Leadership { get; set; }
         public int Save { get; set; }
         public int InvulnerableSave { get; set; }
-        public IEnumerable<Weapon> Weapons { get; set; }
-        public IEnumerable<Rule> Rules { get; set; }
+        public IEnumerable<WeaponModel> Weapons { get; set; }
+        public IEnumerable<RuleModel> Rules { get; set; }
 
         public SheetModel()
         {
-            Weapons = new List<Weapon>();
-            Rules = new List<Rule>();
+            Weapons = new List<WeaponModel>();
+            Rules = new List<RuleModel>();
         }
     }
 }
