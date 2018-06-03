@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Events;
+using System;
 
 namespace SheetsApi
 {
@@ -14,7 +10,26 @@ namespace SheetsApi
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
+                .CreateLogger();
+            try
+            {
+                Log.Information("Starting Sheets API application...");
+                BuildWebHost(args).Run();
+            }
+            catch(Exception ex)
+            {
+                Log.Fatal(ex, "The Sheets API application terminated unexpectedly.");
+                throw;
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
