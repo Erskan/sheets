@@ -15,6 +15,7 @@ namespace SheetsApi
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
+                .WriteTo.RollingFile("log-{Date}.txt")
                 .CreateLogger();
             try
             {

@@ -1,19 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using SheetsApi.Middleware;
+using SheetsApi.Settings;
+using SheetsApi.Shared;
+using SheetsApi.Shared.Interfaces;
+using SheetsApi.Sheets;
 
 namespace SheetsApi
 {
     public class Startup
     {
+        public IMapper Mapper { get; set; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -28,6 +30,14 @@ namespace SheetsApi
             {
                 c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "Sheets API", Version = "v1" });
             });
+            services.AddDbContext<SheetsDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("Sqlite")));
+            services.AddTransient<ISheetService, SheetService>();
+            var mappingConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<SheetsMappingProfile>();
+            });
+            services.AddSingleton<IMapper>(c => mappingConfig.CreateMapper());
+
             services.AddMvc();
         }
 
