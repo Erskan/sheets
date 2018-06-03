@@ -5,6 +5,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SheetsApi.Sheets
 {
@@ -18,7 +19,9 @@ namespace SheetsApi.Sheets
         }
 
         [HttpGet]
+        [Authorize]
         [SwaggerResponse(200, typeof(IEnumerable<Sheet>))]
+        [SwaggerResponse(401)]
         public Task<IActionResult> GetAllSheets()
         {
             throw new NotImplementedException();
