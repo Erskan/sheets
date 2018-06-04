@@ -11,7 +11,8 @@ namespace SheetsApi.Settings
             CreateMap<Sheet, SheetModel>()
                 .ForMember(m => m.Created, a => a.Ignore())
                 .ForMember(m => m.Modified, a => a.Ignore())
-                .ForMember(m => m.AddedByUser, a => a.MapFrom(s => s /* TODO: Get user from token? */));
+                .ForMember(m => m.AddedByUser, a => a.MapFrom(s => s /* TODO: Get user from token? */))
+                .ForMember(m => m.ModifiedByUser, a => a.MapFrom(s => s /* TODO: Get user from token? */));
         }
     }
 }

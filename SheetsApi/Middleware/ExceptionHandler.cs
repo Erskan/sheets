@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using Serilog;
 
 namespace SheetsApi.Middleware
 {
@@ -30,7 +31,7 @@ namespace SheetsApi.Middleware
         private static Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
             var returnCode = HttpStatusCode.InternalServerError;
-
+            Log.Error(ex, ex.Message);
             var result = JsonConvert.SerializeObject(new { error = ex.Message });
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)returnCode;

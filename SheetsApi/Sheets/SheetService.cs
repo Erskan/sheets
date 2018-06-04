@@ -27,6 +27,7 @@ namespace SheetsApi.Sheets
         {
             var sheetModel = _mapper.Map<SheetModel>(sheet);
             var addResult = await _context.Sheets.AddAsync(sheetModel);
+            _context.SaveChanges();
             return addResult.Entity.Id;
         }
     }

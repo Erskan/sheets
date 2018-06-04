@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Serilog;
 using Serilog.Events;
 using System;
+using Microsoft.Extensions.DependencyInjection;
+using SheetsApi.Settings;
+using SheetsApi.Shared;
 
 namespace SheetsApi
 {
@@ -20,7 +23,15 @@ namespace SheetsApi
             try
             {
                 Log.Information("Starting Sheets API application...");
-                BuildWebHost(args).Run();
+                var host = BuildWebHost(args);
+                using (var scope = host.Services.CreateScope())
+                {
+                    var services = scope.ServiceProvider;
+                    var context = services.GetRequiredService<SheetsDbContext>();
+                    InitializeDatabase.Init(context);
+                    context.SaveChanges();
+                }
+                host.Run();
             }
             catch(Exception ex)
             {
