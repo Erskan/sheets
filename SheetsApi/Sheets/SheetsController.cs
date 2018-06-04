@@ -23,6 +23,7 @@ namespace SheetsApi.Sheets
         [HttpGet]
         [SwaggerResponse(200, typeof(IEnumerable<Sheet>))]
         [SwaggerResponse(401)]
+        [SwaggerResponse(500)]
         public async Task<IActionResult> GetAllSheets()
         {
             Log.Information("GET sheets called from {RemoteIpAddress}.", HttpContext.Connection.RemoteIpAddress);
@@ -41,6 +42,8 @@ namespace SheetsApi.Sheets
         [HttpGet("{id}")]
         [SwaggerResponse(200, typeof(Sheet))]
         [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
+        [SwaggerResponse(500)]
         public async Task<IActionResult> GetSheet(int id)
         {
             Log.Information("GET sheets/{id} called from {RemoteIpAddress}.", id, HttpContext.Connection.RemoteIpAddress);
@@ -57,6 +60,8 @@ namespace SheetsApi.Sheets
         [HttpPost]
         [SwaggerResponse(201, typeof(int))]
         [SwaggerResponse(400, typeof(IEnumerable<FluentValidation.Results.ValidationFailure>))]
+        [SwaggerResponse(401)]
+        [SwaggerResponse(500)]
         public async Task<IActionResult> CreateSheet([FromBody] Sheet sheet)
         {
             Log.Information("POST sheets/ called from {RemoteIpAddress}.", HttpContext.Connection.RemoteIpAddress);
@@ -81,6 +86,8 @@ namespace SheetsApi.Sheets
 
         [HttpPut("{id}")]
         [SwaggerResponse(200, typeof(int))]
+        [SwaggerResponse(401)]
+        [SwaggerResponse(500)]
         public Task<IActionResult> UpdateSheet([FromBody] Sheet sheet)
         {
             throw new NotImplementedException();
@@ -88,6 +95,8 @@ namespace SheetsApi.Sheets
 
         [HttpDelete("{id}")]
         [SwaggerResponse(200, typeof(int))]
+        [SwaggerResponse(401)]
+        [SwaggerResponse(500)]
         public Task<IActionResult> DeleteSheet(int id)
         {
             throw new NotImplementedException();

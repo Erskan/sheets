@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SheetsApi.Shared.Interfaces;
 using SheetsApi.Sheets;
 
 namespace SheetsApi.Shared
 {
-    public class SheetsDbContext : DbContext
+    public class SheetsDbContext : DbContext, ISheetsDbContext
     {
         public DbSet<SheetModel> Sheets { get; set; }
         public DbSet<WeaponModel> Weapons { get; set; }

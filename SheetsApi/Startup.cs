@@ -52,6 +52,7 @@ namespace SheetsApi
             });
             services.AddDbContext<SheetsDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("Sqlite")));
             services.AddTransient<ISheetService, SheetService>();
+            services.AddScoped<ISheetsDbContext>(provider => provider.GetService<SheetsDbContext>());
             var mappingConfig = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<SheetsMappingProfile>();

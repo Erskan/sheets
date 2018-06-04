@@ -9,10 +9,10 @@ namespace SheetsApi.Sheets
 {
     public class SheetService : ISheetService
     {
-        private readonly SheetsDbContext _context;
+        private readonly ISheetsDbContext _context;
         private readonly IMapper _mapper;
 
-        public SheetService(SheetsDbContext context, IMapper mapper)
+        public SheetService(ISheetsDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
