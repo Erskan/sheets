@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SheetsApi.Forces;
 using SheetsApi.Shared.Interfaces;
 using SheetsApi.Sheets;
 
@@ -11,6 +12,7 @@ namespace SheetsApi.Shared
         public DbSet<WeaponTypeModel> WeaponTypes { get; set; }
         public DbSet<RuleModel> Rules { get; set; }
         public DbSet<SheetsUser> Users { get; set; }
+        public DbSet<ForceModel> Forces { get; set; }
 
         public SheetsDbContext(DbContextOptions<SheetsDbContext> options) : base(options)
         {

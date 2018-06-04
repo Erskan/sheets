@@ -15,6 +15,7 @@ using SheetsApi.Sheets;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using SheetsApi.Forces;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace SheetsApi
@@ -52,6 +53,7 @@ namespace SheetsApi
             });
             services.AddDbContext<SheetsDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("Sqlite")));
             services.AddTransient<ISheetService, SheetService>();
+            services.AddTransient<IForceService, ForceService>();
             services.AddScoped<ISheetsDbContext>(provider => provider.GetService<SheetsDbContext>());
             var mappingConfig = new MapperConfiguration(cfg =>
             {

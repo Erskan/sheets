@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SheetsApi.Forces;
 using SheetsApi.Sheets;
 
 namespace SheetsApi.Settings
@@ -13,6 +14,7 @@ namespace SheetsApi.Settings
                 .ForMember(m => m.Modified, a => a.Ignore())
                 .ForMember(m => m.AddedByUser, a => a.MapFrom(s => s /* TODO: Get user from token? */))
                 .ForMember(m => m.ModifiedByUser, a => a.MapFrom(s => s /* TODO: Get user from token? */));
+            CreateMap<ForceModel, Force>();
         }
     }
 }
