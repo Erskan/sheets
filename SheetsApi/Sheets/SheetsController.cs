@@ -4,11 +4,13 @@ using SheetsApi.Shared.Interfaces;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
 namespace SheetsApi.Sheets
 {
+    [Authorize]
     [Route("sheets")]
     public class SheetsController : Controller
     {
@@ -19,12 +21,21 @@ namespace SheetsApi.Sheets
         }
 
         [HttpGet]
-        [Authorize]
         [SwaggerResponse(200, typeof(IEnumerable<Sheet>))]
         [SwaggerResponse(401)]
-        public Task<IActionResult> GetAllSheets()
+        public async Task<IActionResult> GetAllSheets()
         {
-            throw new NotImplementedException();
+            Log.Information("GET sheets called from {RemoteIpAddress}.", HttpContext.Connection.RemoteIpAddress);
+            var sheets = await _sheetService.GetAllAsync();
+            if (sheets == null || !sheets.Any())
+            {
+                Log.Warning("sheets NOT found. Returning 404.");
+                return NotFound();
+            }
+
+            var sheetsFound = sheets.Count();
+            Log.Information("{sheetsFound} sheets found. Returning sheets.", sheetsFound);
+            return Ok(sheets);
         }
 
         [HttpGet("{id}")]

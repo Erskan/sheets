@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SheetsApi.Shared;
 using SheetsApi.Shared.Interfaces;
@@ -21,6 +22,12 @@ namespace SheetsApi.Sheets
         {
             var sheetModel = await _context.Sheets.FirstOrDefaultAsync(x => x.Id == id);
             return _mapper.Map<Sheet>(sheetModel);
+        }
+
+        public async Task<IEnumerable<Sheet>> GetAllAsync()
+        {
+            var sheetModels = await _context.Sheets.ToListAsync();
+            return _mapper.Map<IEnumerable<Sheet>>(sheetModels);
         }
 
         public async Task<int> CreateAsync(Sheet sheet)
