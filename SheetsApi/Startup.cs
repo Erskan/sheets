@@ -16,6 +16,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using SheetsApi.Forces;
+using SheetsApi.Games;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace SheetsApi
@@ -30,8 +31,7 @@ namespace SheetsApi
         }
 
         public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+        
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
@@ -54,6 +54,7 @@ namespace SheetsApi
             services.AddDbContext<SheetsDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("Sqlite")));
             services.AddTransient<ISheetService, SheetService>();
             services.AddTransient<IForceService, ForceService>();
+            services.AddTransient<IGameService, GameService>();
             services.AddScoped<ISheetsDbContext>(provider => provider.GetService<SheetsDbContext>());
             var mappingConfig = new MapperConfiguration(cfg =>
             {
@@ -96,8 +97,7 @@ namespace SheetsApi
             services.AddMvc()
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())

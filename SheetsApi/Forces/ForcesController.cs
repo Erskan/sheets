@@ -7,7 +7,7 @@ namespace SheetsApi.Forces
 {
     [Authorize]
     [Route("forces")]
-    public class ForceController : Controller
+    public class ForcesController : Controller
     {
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
