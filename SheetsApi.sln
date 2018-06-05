@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SheetsApi", "SheetsApi\SheetsApi.csproj", "{A57C0700-7685-46DD-8B6D-9CD7783DC235}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SheetsApi", "SheetsApi\SheetsApi.csproj", "{A57C0700-7685-46DD-8B6D-9CD7783DC235}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SheetsApi.UnitTests", "SheetsApi.UnitTests\SheetsApi.UnitTests.csproj", "{8C7A67BE-BF36-490B-B6C4-4C471646F4D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A57C0700-7685-46DD-8B6D-9CD7783DC235}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A57C0700-7685-46DD-8B6D-9CD7783DC235}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A57C0700-7685-46DD-8B6D-9CD7783DC235}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C7A67BE-BF36-490B-B6C4-4C471646F4D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C7A67BE-BF36-490B-B6C4-4C471646F4D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C7A67BE-BF36-490B-B6C4-4C471646F4D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C7A67BE-BF36-490B-B6C4-4C471646F4D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
