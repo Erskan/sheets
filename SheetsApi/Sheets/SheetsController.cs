@@ -86,11 +86,29 @@ namespace SheetsApi.Sheets
 
         [HttpPut("{id}")]
         [SwaggerResponse(200, typeof(int))]
+        [SwaggerResponse(400, typeof(IEnumerable<FluentValidation.Results.ValidationFailure>))]
         [SwaggerResponse(401)]
         [SwaggerResponse(500)]
-        public Task<IActionResult> UpdateSheet([FromBody] Sheet sheet)
+        public async Task<IActionResult> UpdateSheet([FromBody] Sheet sheet)
         {
-            throw new NotImplementedException();
+            Log.Information("PUT sheets/ called from {RemoteIpAddress}.", HttpContext.Connection.RemoteIpAddress);
+            if (sheet == null)
+            {
+                Log.Information("Null sheet supplied. Returning 400.");
+                return StatusCode(400);
+            }
+
+            var sheetValidator = new SheetValidator();
+            var validationResult = sheetValidator.Validate(sheet);
+            if (!validationResult.IsValid)
+            {
+                Log.Information("Validation error in supplied sheet. Returning 400.");
+                return StatusCode(400, validationResult.Errors);
+            }
+
+            var id = _sheetService.Update(sheet);
+            Log.Information("Successfully updated sheet {id}", id);
+            return Ok(id);
         }
 
         [HttpDelete("{id}")]

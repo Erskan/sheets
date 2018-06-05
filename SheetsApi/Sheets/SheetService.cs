@@ -37,5 +37,12 @@ namespace SheetsApi.Sheets
             _context.SaveChanges();
             return addResult.Entity.Id;
         }
+
+        public int Update(Sheet sheet)
+        {
+            var sheetModel = _mapper.Map<SheetModel>(sheet);
+            var updateResult = _context.Sheets.Update(sheetModel);
+            return updateResult.Entity.Id;
+        }
     }
 }

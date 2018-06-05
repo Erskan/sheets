@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SheetsApi.Shared.Interfaces;
 using Serilog;
+using System.Linq;
 
 namespace SheetsApi.Forces
 {

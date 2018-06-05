@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SheetsApi.Forces;
+using SheetsApi.Games;
 using SheetsApi.Shared.Interfaces;
 using SheetsApi.Sheets;
 
@@ -13,6 +14,7 @@ namespace SheetsApi.Shared
         public DbSet<RuleModel> Rules { get; set; }
         public DbSet<SheetsUser> Users { get; set; }
         public DbSet<ForceModel> Forces { get; set; }
+        public DbSet<GameModel> Games { get; set; }
 
         public SheetsDbContext(DbContextOptions<SheetsDbContext> options) : base(options)
         {
@@ -58,6 +60,26 @@ namespace SheetsApi.Shared
                 .Property(m => m.Created)
                 .HasDefaultValueSql("getdate()");
             modelBuilder.Entity<RuleModel>()
+                .Property(m => m.Modified)
+                .HasDefaultValueSql("getdate()");
+            // ForceModel
+            modelBuilder.Entity<ForceModel>()
+                .HasKey(m => m.Id)
+                .HasName("PK_ForceModel_Id");
+            modelBuilder.Entity<ForceModel>()
+                .Property(m => m.Created)
+                .HasDefaultValueSql("getdate()");
+            modelBuilder.Entity<ForceModel>()
+                .Property(m => m.Modified)
+                .HasDefaultValueSql("getdate()");
+            // GameModel
+            modelBuilder.Entity<GameModel>()
+                .HasKey(m => m.Id)
+                .HasName("PK_GameModel_Id");
+            modelBuilder.Entity<GameModel>()
+                .Property(m => m.Created)
+                .HasDefaultValueSql("getdate()");
+            modelBuilder.Entity<GameModel>()
                 .Property(m => m.Modified)
                 .HasDefaultValueSql("getdate()");
             // SheetsUser
