@@ -10,5 +10,6 @@ namespace SheetsApi.Shared.Interfaces
         Task<IEnumerable<Sheet>> GetAllAsync();
         Task<int> CreateAsync(Sheet sheet);
         int Update(Sheet sheet);
+        Task<int> DeleteAsync(int id);
     }
 }

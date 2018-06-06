@@ -113,11 +113,26 @@ namespace SheetsApi.Sheets
 
         [HttpDelete("{id}")]
         [SwaggerResponse(200, typeof(int))]
+        [SwaggerResponse(400, typeof(string))]
         [SwaggerResponse(401)]
         [SwaggerResponse(500)]
-        public Task<IActionResult> DeleteSheet(int id)
+        public async Task<IActionResult> DeleteSheet(int id)
         {
-            throw new NotImplementedException();
+            Log.Information("DELETE sheets/{id} called from {RemoteIpAddress}.", HttpContext.Connection.RemoteIpAddress, id);
+            if (id <= 0)
+            {
+                return StatusCode(400, "Supplied id is lesser than or equal to zero(0).");
+            }
+
+            var removedId = await _sheetService.DeleteAsync(id);
+            if (removedId <= 0)
+            {
+                Log.Warning("There was a problem when trying to delete sheet id: {id} from the database. Returning 400.", id);
+                return StatusCode(400, $"There was a problem deleting the sheet id: {id} from the database. Make sure a valid id was supplied.");
+            }
+
+            Log.Information("Sheet with id {removedId} was deleted from the database.", removedId);
+            return Ok(id);
         }
     }
 }

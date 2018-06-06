@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data.Common;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SheetsApi.Shared;
@@ -43,6 +44,20 @@ namespace SheetsApi.Sheets
             var sheetModel = _mapper.Map<SheetModel>(sheet);
             var updateResult = _context.Sheets.Update(sheetModel);
             return updateResult.Entity.Id;
+        }
+
+        public async Task<int> DeleteAsync(int id)
+        {
+            var sheetToDelete = await _context.Sheets.FindAsync(id);
+            if (sheetToDelete == null)
+            {
+                return -1;
+            }
+
+            var removedSheet = _context.Sheets.Remove(sheetToDelete);
+            _context.SaveChanges();
+
+            return removedSheet.Entity.Id;
         }
     }
 }
