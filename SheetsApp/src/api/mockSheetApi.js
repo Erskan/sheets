@@ -3,43 +3,73 @@ import delay from './delay';
 const sheets = [
   {
     id: 1,
-    name: "Building Applications in React and Flux",
-    watchHref: "http://www.pluralsight.com/courses/react-flux-building-applications",
-    authorId: "cory-house",
-    length: "5:08",
-    category: "JavaScript"
+    name: "Standard dude",
+    movement: 6,
+    weaponSkill: 4,
+    ballisticSkill: 3,
+    strength: 3,
+    toughness: 3,
+    wounds: 1,
+    attacks: 1,
+    leadership: 6,
+    save: 5,
+    invulnerableSave: 0
   },
   {
     id: 2,
-    name: "Clean Code: Writing Code for Humans",
-    watchHref: "http://www.pluralsight.com/courses/writing-clean-code-humans",
-    authorId: "cory-house",
-    length: "3:10",
-    category: "Software Practices"
+    name: "Other dude",
+    movement: 6,
+    weaponSkill: 3,
+    ballisticSkill: 4,
+    strength: 4,
+    toughness: 3,
+    wounds: 1,
+    attacks: 2,
+    leadership: 6,
+    save: 5,
+    invulnerableSave: 0
   },
   {
     id: 3,
-    name: "Architecting Applications for the Real World",
-    watchHref: "http://www.pluralsight.com/courses/architecting-applications-dotnet",
-    authorId: "cory-house",
-    length: "2:52",
-    category: "Software Architecture"
+    name: "Speedy punch dude",
+    movement: 8,
+    weaponSkill: 3,
+    ballisticSkill: 3,
+    strength: 5,
+    toughness: 3,
+    wounds: 2,
+    attacks: 1,
+    leadership: 9,
+    save: 5,
+    invulnerableSave: 5
   },
   {
     id: 4,
-    name: "Becoming an Outlier: Reprogramming the Developer Mind",
-    watchHref: "http://www.pluralsight.com/courses/career-reboot-for-developer-mind",
-    authorId: "cory-house",
-    length: "2:30",
-    category: "Career"
+    name: "Big dude",
+    movement: 12,
+    weaponSkill: 2,
+    ballisticSkill: 3,
+    strength: 6,
+    toughness: 7,
+    wounds: 12,
+    attacks: 5,
+    leadership: 10,
+    save: 2,
+    invulnerableSave: 4
   },
   {
     id: 5,
-    name: "Web Component Fundamentals",
-    watchHref: "http://www.pluralsight.com/courses/web-components-shadow-dom",
-    authorId: "cory-house",
-    length: "5:10",
-    category: "HTML5"
+    name: "Leader dude",
+    movement: 6,
+    weaponSkill: 2,
+    ballisticSkill: 2,
+    strength: 4,
+    toughness: 4,
+    wounds: 5,
+    attacks: 3,
+    leadership: 10,
+    save: 3,
+    invulnerableSave: 5
   }
 ];
 

@@ -2,21 +2,20 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as sheetActions from '../../actions/sheetActions';
+import SheetList from './SheetList';
 
 class SheetsPage extends React.Component{
     constructor(props, context) {
         super(props, context);
     }
 
-    sheetsRow(sheet, index) {
-        return <div key={index}>{sheet.name}</div>;
-    }
-
     render() {
+        const { sheets } = this.props;
+
         return(
             <div>
                 <h1>Sheets</h1>
-                {this.props.sheets.map(this.sheetsRow)}
+                <SheetList sheets={sheets} />
             </div>
         );
     }
