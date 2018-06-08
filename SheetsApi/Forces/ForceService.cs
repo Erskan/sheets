@@ -24,5 +24,18 @@ namespace SheetsApi.Forces
             var forceModels = await _context.Forces.ToListAsync();
             return _mapper.Map<IEnumerable<Force>>(forceModels);
         }
+
+        public async Task<Force> GetAsync(int id)
+        {
+            var forceModel = await _context.Forces.FindAsync(id);
+            return _mapper.Map<Force>(forceModel);
+        }
+
+        public async Task<int> CreateAsync(Force force)
+        {
+            var forceModel = _mapper.Map<ForceModel>(force);
+            var createdModel = await _context.Forces.AddAsync(forceModel);
+            return createdModel.Entity.Id;
+        }
     }
 }
