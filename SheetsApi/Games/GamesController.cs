@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using SheetsApi.Shared.Interfaces;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace SheetsApi.Games
 {
@@ -21,6 +22,10 @@ namespace SheetsApi.Games
         }
 
         [HttpGet]
+        [SwaggerResponse(200, typeof(IEnumerable<Game>))]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
+        [SwaggerResponse(500)]
         public async Task<IActionResult> GetAllAsync()
         {
             Log.Information("GET games called from {RemoteIpAddress}.", HttpContext.Connection.RemoteIpAddress);
@@ -37,12 +42,21 @@ namespace SheetsApi.Games
         }
 
         [HttpGet("{id}")]
+        [SwaggerResponse(200, typeof(Game))]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
+        [SwaggerResponse(404)]
+        [SwaggerResponse(500)]
         public async Task<IActionResult> GetAsync(int id)
         {
             throw new NotImplementedException();
         }
 
         [HttpPost]
+        [SwaggerResponse(201, typeof(int))]
+        [SwaggerResponse(400)]
+        [SwaggerResponse(401)]
+        [SwaggerResponse(500)]
         public async Task<IActionResult> CreateAsync([FromBody] Game game)
         {
             throw new NotImplementedException();

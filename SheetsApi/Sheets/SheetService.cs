@@ -21,8 +21,8 @@ namespace SheetsApi.Sheets
 
         public async Task<Sheet> GetAsync(int id)
         {
-            var sheetModel = await _context.Sheets.FirstOrDefaultAsync(x => x.Id == id);
-            return _mapper.Map<Sheet>(sheetModel);
+            var sheetModel = await _context.Sheets.FindAsync(id);
+            return sheetModel == null ? null : _mapper.Map<Sheet>(sheetModel);
         }
 
         public async Task<IEnumerable<Sheet>> GetAllAsync()

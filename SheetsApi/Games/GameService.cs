@@ -22,5 +22,11 @@ namespace SheetsApi.Games
             var gameModels = await _context.Games.ToListAsync();
             return _mapper.Map<IEnumerable<Game>>(gameModels);
         }
+
+        public async Task<Game> GetAsync(int id)
+        {
+            var gameModel = await _context.Games.FindAsync(id);
+            return gameModel == null ? null : _mapper.Map<Game>(gameModel);
+        }
     }
 }
