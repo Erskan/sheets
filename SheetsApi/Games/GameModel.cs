@@ -13,14 +13,14 @@ namespace SheetsApi.Games
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
         public SheetsUser ModifiedByUser { get; set; }
-        public IEnumerable<Force> Forces { get; set; }
         public Force Winner { get; set; }
         public Force Loser { get; set; }
+        public int WinnerScore { get; set; }
+        public int LoserScore { get; set; }
         public DateTime Completed { get; set; }
 
         public GameModel()
         {
-            Forces = new List<Force>();
         }
     }
 }

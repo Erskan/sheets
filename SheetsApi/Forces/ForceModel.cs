@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SheetsApi.Games;
 using SheetsApi.Shared;
 using SheetsApi.Sheets;
 
@@ -13,7 +14,9 @@ namespace SheetsApi.Forces
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
         public SheetsUser ModifiedByUser { get; set; }
+
         public IEnumerable<Sheet> Sheets { get; set; }
+        public IEnumerable<Game> Games { get; set; }
 
         public ForceModel()
         {
