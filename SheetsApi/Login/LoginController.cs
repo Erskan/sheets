@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using SheetsApi.Middleware;
 
 namespace SheetsApi.Login
