@@ -7,5 +7,7 @@ namespace SheetsApi.Shared.Interfaces
     public interface IGameService
     {
         Task<IEnumerable<Game>> GetAllAsync();
+        Task<Game> GetAsync(int id);
+        Task<int> CreateAsync(Game game);
     }
 }

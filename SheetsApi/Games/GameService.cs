@@ -28,5 +28,10 @@ namespace SheetsApi.Games
             var gameModel = await _context.Games.FindAsync(id);
             return gameModel == null ? null : _mapper.Map<Game>(gameModel);
         }
+
+        public Task<int> CreateAsync(Game game)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
