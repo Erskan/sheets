@@ -25,7 +25,7 @@ namespace SheetsApi.Settings
 
             var defaultSheet = new SheetModel
             {
-                Id = 1,
+                SheetId = 1,
                 Attacks = 2,
                 BallisticSkill = 4,
                 InvulnerableSave = 0,

@@ -11,9 +11,10 @@ using System;
 namespace SheetsApi.Migrations
 {
     [DbContext(typeof(SheetsDbContext))]
-    partial class SheetsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180609162359_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

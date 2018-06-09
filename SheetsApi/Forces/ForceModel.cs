@@ -8,19 +8,20 @@ namespace SheetsApi.Forces
 {
     public class ForceModel
     {
-        public int Id { get; set; }
+        public int ForceId { get; set; }
         public string Name { get; set; }
         public SheetsUser AddedByUser { get; set; }
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
         public SheetsUser ModifiedByUser { get; set; }
 
-        public IEnumerable<Sheet> Sheets { get; set; }
-        public IEnumerable<Game> Games { get; set; }
+        public IEnumerable<SheetModel> Sheets { get; set; }
+        public IEnumerable<GameForceMap> GameForceMaps { get; set; }
 
         public ForceModel()
         {
-            Sheets = new List<Sheet>();
+            Sheets = new List<SheetModel>();
+            GameForceMaps = new List<GameForceMap>();
         }
     }
 }

@@ -24,7 +24,7 @@ namespace SheetsApi.Shared
         {
             // SheetModel
             modelBuilder.Entity<SheetModel>()
-                .HasKey(m => m.Id)
+                .HasKey(m => m.SheetId)
                 .HasName("PK_SheetModel_Id");
             modelBuilder.Entity<SheetModel>()
                 .Property(m => m.Created)
@@ -64,7 +64,7 @@ namespace SheetsApi.Shared
                 .HasDefaultValueSql("getdate()");
             // ForceModel
             modelBuilder.Entity<ForceModel>()
-                .HasKey(m => m.Id)
+                .HasKey(m => m.ForceId)
                 .HasName("PK_ForceModel_Id");
             modelBuilder.Entity<ForceModel>()
                 .Property(m => m.Created)
@@ -74,7 +74,7 @@ namespace SheetsApi.Shared
                 .HasDefaultValueSql("getdate()");
             // GameModel
             modelBuilder.Entity<GameModel>()
-                .HasKey(m => m.Id)
+                .HasKey(m => m.GameId)
                 .HasName("PK_GameModel_Id");
             modelBuilder.Entity<GameModel>()
                 .Property(m => m.Created)
@@ -86,6 +86,26 @@ namespace SheetsApi.Shared
             modelBuilder.Entity<SheetsUser>()
                 .HasKey(m => m.Id)
                 .HasName("PK_SheetsUser_Id");
+
+            // Mapping tables
+            modelBuilder.Entity<GameForceMap>()
+                .HasKey(gfm => new { gfm.ForceId, gfm.GameId});
+            modelBuilder.Entity<GameForceMap>()
+                .HasOne(gfm => gfm.Game)
+                .WithMany(g => g.GameForceMap)
+                .HasForeignKey(gfm => gfm.GameId);
+            modelBuilder.Entity<GameForceMap>()
+                .HasOne(gfm => gfm.Force)
+                .WithMany(f => f.GameForceMaps)
+                .HasForeignKey(gfm => gfm.ForceId);
         }
+    }
+
+    public class GameForceMap
+    {
+        public GameModel Game { get; set; }
+        public ForceModel Force { get; set; }
+        public int GameId { get; set; }
+        public int ForceId { get; set; }
     }
 }

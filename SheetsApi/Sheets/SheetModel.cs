@@ -6,7 +6,7 @@ namespace SheetsApi.Sheets
 {
     public class SheetModel
     {
-        public int Id { get; set; }
+        public int SheetId { get; set; }
         public string Name { get; set; }
         public SheetsUser AddedByUser { get; set; }
         public DateTime Created { get; set; }

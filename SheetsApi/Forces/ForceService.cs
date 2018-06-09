@@ -36,7 +36,7 @@ namespace SheetsApi.Forces
             var forceModel = _mapper.Map<ForceModel>(force);
             var createdModel = await _context.Forces.AddAsync(forceModel);
             _context.SaveChanges();
-            return createdModel.Entity.Id;
+            return createdModel.Entity.ForceId;
         }
     }
 }

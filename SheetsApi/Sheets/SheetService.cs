@@ -36,14 +36,14 @@ namespace SheetsApi.Sheets
             var sheetModel = _mapper.Map<SheetModel>(sheet);
             var addResult = await _context.Sheets.AddAsync(sheetModel);
             _context.SaveChanges();
-            return addResult.Entity.Id;
+            return addResult.Entity.SheetId;
         }
 
         public int Update(Sheet sheet)
         {
             var sheetModel = _mapper.Map<SheetModel>(sheet);
             var updateResult = _context.Sheets.Update(sheetModel);
-            return updateResult.Entity.Id;
+            return updateResult.Entity.SheetId;
         }
 
         public async Task<int> DeleteAsync(int id)
@@ -57,7 +57,7 @@ namespace SheetsApi.Sheets
             var removedSheet = _context.Sheets.Remove(sheetToDelete);
             _context.SaveChanges();
 
-            return removedSheet.Entity.Id;
+            return removedSheet.Entity.SheetId;
         }
     }
 }

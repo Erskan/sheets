@@ -10,8 +10,8 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace SheetsApi.Forces
 {
-    [Authorize]
     [Route("forces")]
+    [Authorize]
     public class ForcesController : Controller
     {
         private readonly IForceService _forceService;
