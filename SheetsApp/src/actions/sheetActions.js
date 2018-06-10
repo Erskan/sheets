@@ -12,5 +12,5 @@ export function loadSheets() {
         }).catch((error) => {
             throw(error);
         });
-    }
+    };
 }
