@@ -3,10 +3,17 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as sheetActions from '../../actions/sheetActions';
 import SheetList from './SheetList';
+import { browserHistory } from 'react-router';
 
 class SheetsPage extends React.Component{
     constructor(props, context) {
         super(props, context);
+
+        this.redirectToAddSheetPage = this.redirectToAddSheetPage.bind(this);
+    }
+
+    redirectToAddSheetPage(){
+        browserHistory.push('/sheet');
     }
 
     render() {
@@ -15,6 +22,11 @@ class SheetsPage extends React.Component{
         return(
             <div>
                 <h1>Sheets</h1>
+                <input
+                    type="submit"
+                    value="Add Sheet"
+                    className="btn btn-primary"
+                    onClick={this.redirectToAddSheetPage} />
                 <SheetList sheets={sheets} />
             </div>
         );

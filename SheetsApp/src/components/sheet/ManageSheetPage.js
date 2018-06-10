@@ -12,6 +12,21 @@ class ManageSheetPage extends React.Component {
             sheet: Object.assign({}, props.sheet),
             errors: {}
         };
+        this.updateSheetState = this.updateSheetState.bind(this);
+        this.saveSheet = this.saveSheet.bind(this);
+    }
+
+    updateSheetState(event) {
+        const field = event.target.name;
+        let sheet = Object.assign({}, this.state.sheet);
+        sheet[field] = event.target.value;
+        return this.setState({sheet: sheet});
+    }
+
+    saveSheet(event) {
+        event.preventDefault();
+        this.props.actions.saveSheet(this.state.sheet);
+        this.context.router.push('/sheets');
     }
 
     render() {
@@ -22,6 +37,8 @@ class ManageSheetPage extends React.Component {
                     sheet={this.state.sheet}
                     errors={this.state.errors}
                     forces={this.props.forces}
+                    onChange={this.updateSheetState}
+                    onSave={this.saveSheet}
                      />
             </div>
         );
@@ -30,23 +47,27 @@ class ManageSheetPage extends React.Component {
 
 ManageSheetPage.propTypes = {
     sheet: PropTypes.object.isRequired,
-    forces: PropTypes.array.isRequired
+    forces: PropTypes.array.isRequired,
+    actions: PropTypes.object.isRequired
+};
+
+ManageSheetPage.contextTypes = {
+    router: PropTypes.object
 };
 
 function mapStateToProps(state, ownProps) {
     let sheet = {
-        id: 5,
-        name: "Leader dude",
-        movement: 6,
-        weaponSkill: 2,
-        ballisticSkill: 2,
-        strength: 4,
-        toughness: 4,
-        wounds: 5,
-        attacks: 3,
-        leadership: 10,
-        save: 3,
-        invulnerableSave: 5
+        name: "",
+        movement: 0,
+        weaponSkill: 0,
+        ballisticSkill: 0,
+        strength: 0,
+        toughness: 0,
+        wounds: 0,
+        attacks: 0,
+        leadership: 0,
+        save: 0,
+        invulnerableSave: 0
     };
 
     const forcesFormattedForSelect = state.forces.map((force) => {

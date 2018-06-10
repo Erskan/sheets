@@ -97,7 +97,7 @@ class SheetApi {
       setTimeout(() => {
         // Simulate server-side validation
         const minSheetNameLength = 1;
-        if (sheet.title.length < minSheetNameLength) {
+        if (sheet.name.length < minSheetNameLength) {
           reject(`Name must be at least ${minSheetNameLength} characters.`);
         }
 
@@ -105,12 +105,8 @@ class SheetApi {
           const existingSheetIndex = sheets.findIndex(a => a.id == sheet.id);
           sheets.splice(existingSheetIndex, 1, sheet);
         } else {
-          //Just simulating creation here.
-          //The server would generate ids and watchHref's for new courses in a real app.
-          //Cloning so copy returned is passed by value rather than by reference.
           sheet.id = generateId(sheet);
-          sheet.watchHref = `http://www.pluralsight.com/courses/${sheet.id}`;
-          sheet.push(sheet);
+          sheets.push(sheet);
         }
 
         resolve(sheet);

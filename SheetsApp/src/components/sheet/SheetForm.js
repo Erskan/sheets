@@ -14,7 +14,15 @@ const SheetForm = ({sheet, forces, onSave, onChange, loading, errors}) => {
             <SelectInput
                 name="force"
                 label="Force"
-                options={forces} />
+                defaultOption="Select Force"
+                options={forces}
+                onChange={onChange} />
+            <input
+                type="submit"
+                disabled={loading}
+                value={loading ? 'Saving...' : 'Save'}
+                className="btn btn-primary"
+                onClick={onSave} />
         </form>
     );
 };
