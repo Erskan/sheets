@@ -13,8 +13,9 @@ const SheetForm = ({sheet, forces, onSave, onChange, loading, errors}) => {
                 onChange={onChange}
                 errors={errors} />
             <SelectInput
-                name="force"
+                name="forceId"
                 label="Force"
+                value={sheet.forceId}
                 defaultOption="Select Force"
                 options={forces}
                 onChange={onChange} />

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 
-const SheetListRow = ({sheet}) => {
+const SheetListRow = ({sheet, forces}) => {
     return (
         <tr>
             <td>&nbsp;</td>
@@ -16,12 +16,14 @@ const SheetListRow = ({sheet}) => {
             <td>{sheet.leadership}</td>
             <td>{sheet.save}</td>
             <td>{sheet.invulnerableSave}</td>
+            <td>{forces.filter(force => force.id == sheet.forceId)[0].name}</td>
         </tr>
     );
 };
 
 SheetListRow.propTypes = {
-    sheet: PropTypes.object.isRequired
+    sheet: PropTypes.object.isRequired,
+    forces: PropTypes.array.isRequired
 };
 
 export default SheetListRow;

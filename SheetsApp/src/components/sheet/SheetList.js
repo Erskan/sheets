@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import SheetListRow from './SheetListRow';
 
-const SheetList = ({sheets}) => {
+const SheetList = ({sheets, forces}) => {
     return (
         <table className="table">
             <thead>
@@ -18,11 +18,12 @@ const SheetList = ({sheets}) => {
                 <th>Leadership</th>
                 <th>Save</th>
                 <th>Invulnerable Save</th>
+                <th>Force</th>
             </tr>
             </thead>
             <tbody>
             {sheets.map((sheet) => 
-                <SheetListRow key={sheet.id} sheet={sheet} />
+                <SheetListRow key={sheet.id} sheet={sheet} forces={forces} />
             )}
             </tbody>
         </table>
@@ -30,7 +31,8 @@ const SheetList = ({sheets}) => {
 };
 
 SheetList.propTypes = {
-    sheets: PropTypes.array.isRequired
+    sheets: PropTypes.array.isRequired,
+    forces: PropTypes.array.isRequired
 };
 
 export default SheetList;

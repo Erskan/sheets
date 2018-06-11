@@ -83,7 +83,8 @@ function mapStateToProps(state, ownProps) {
         attacks: 0,
         leadership: 0,
         save: 0,
-        invulnerableSave: 0
+        invulnerableSave: 0,
+        forceId: 0
     };
 
     if(sheetId && state.sheets.length > 0) {

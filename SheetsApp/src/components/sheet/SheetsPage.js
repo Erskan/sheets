@@ -17,7 +17,7 @@ class SheetsPage extends React.Component{
     }
 
     render() {
-        const { sheets } = this.props;
+        const { sheets, forces } = this.props;
 
         return(
             <div>
@@ -27,7 +27,7 @@ class SheetsPage extends React.Component{
                     value="Add Sheet"
                     className="btn btn-primary"
                     onClick={this.redirectToAddSheetPage} />
-                <SheetList sheets={sheets} />
+                <SheetList sheets={sheets} forces={forces} />
             </div>
         );
     }
@@ -35,12 +35,14 @@ class SheetsPage extends React.Component{
 
 SheetsPage.propTypes = {
     sheets: PropTypes.array.isRequired,
+    forces: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {
     return {
-        sheets: state.sheets
+        sheets: state.sheets,
+        forces: state.forces
     };
 }
 

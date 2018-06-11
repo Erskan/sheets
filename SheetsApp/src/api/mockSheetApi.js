@@ -13,7 +13,8 @@ const sheets = [
     attacks: 1,
     leadership: 6,
     save: 5,
-    invulnerableSave: 0
+    invulnerableSave: 0,
+    forceId: 1
   },
   {
     id: 2,
@@ -27,7 +28,8 @@ const sheets = [
     attacks: 2,
     leadership: 6,
     save: 5,
-    invulnerableSave: 0
+    invulnerableSave: 0,
+    forceId: 2
   },
   {
     id: 3,
@@ -41,7 +43,8 @@ const sheets = [
     attacks: 1,
     leadership: 9,
     save: 5,
-    invulnerableSave: 5
+    invulnerableSave: 5,
+    forceId: 1
   },
   {
     id: 4,
@@ -55,7 +58,8 @@ const sheets = [
     attacks: 5,
     leadership: 10,
     save: 2,
-    invulnerableSave: 4
+    invulnerableSave: 4,
+    forceId: 3
   },
   {
     id: 5,
@@ -69,7 +73,8 @@ const sheets = [
     attacks: 3,
     leadership: 10,
     save: 3,
-    invulnerableSave: 5
+    invulnerableSave: 5,
+    forceId: 1
   }
 ];
 
