@@ -16,6 +16,12 @@ class ManageSheetPage extends React.Component {
         this.saveSheet = this.saveSheet.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(this.props.sheet.id != nextProps.sheet.id) {
+            this.setState({sheet: Object.assign({}, nextProps.sheet)});
+        }
+    }
+
     updateSheetState(event) {
         const field = event.target.name;
         let sheet = Object.assign({}, this.state.sheet);
@@ -55,7 +61,17 @@ ManageSheetPage.contextTypes = {
     router: PropTypes.object
 };
 
+function getSheetById(sheets, sheetId) {
+    const sheet = sheets.filter(s => s.id == sheetId);
+    if(sheet) {
+        return sheet[0];
+    }
+    return null;
+}
+
 function mapStateToProps(state, ownProps) {
+    const sheetId = ownProps.params.id;
+    
     let sheet = {
         name: "",
         movement: 0,
@@ -69,6 +85,10 @@ function mapStateToProps(state, ownProps) {
         save: 0,
         invulnerableSave: 0
     };
+
+    if(sheetId && state.sheets.length > 0) {
+        sheet = getSheetById(state.sheets, sheetId);
+    }
 
     const forcesFormattedForSelect = state.forces.map((force) => {
         return {

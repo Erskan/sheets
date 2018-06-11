@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
+import NumberInput from '../common/NumberInput';
 
 const SheetForm = ({sheet, forces, onSave, onChange, loading, errors}) => {
     return (
@@ -16,6 +17,56 @@ const SheetForm = ({sheet, forces, onSave, onChange, loading, errors}) => {
                 label="Force"
                 defaultOption="Select Force"
                 options={forces}
+                onChange={onChange} />
+            <NumberInput
+                name="movement"
+                label="Movement"
+                value={sheet.movement}
+                onChange={onChange} />
+            <NumberInput
+                name="weaponSkill"
+                label="Weapon Skill"
+                value={sheet.weaponSkill}
+                onChange={onChange} />
+            <NumberInput
+                name="ballisticSkill"
+                label="Ballistic Skill"
+                value={sheet.ballisticSkill}
+                onChange={onChange} />
+            <NumberInput
+                name="strength"
+                label="Strength"
+                value={sheet.strength}
+                onChange={onChange} />
+            <NumberInput
+                name="toughness"
+                label="Toughness"
+                value={sheet.toughness}
+                onChange={onChange} />
+            <NumberInput
+                name="wounds"
+                label="Wounds"
+                value={sheet.wounds}
+                onChange={onChange} />
+            <NumberInput
+                name="attacks"
+                label="Attacks"
+                value={sheet.attacks}
+                onChange={onChange} />
+            <NumberInput
+                name="leadership"
+                label="Leadership"
+                value={sheet.leadership}
+                onChange={onChange} />
+            <NumberInput
+                name="save"
+                label="Save"
+                value={sheet.save}
+                onChange={onChange} />
+            <NumberInput
+                name="invulnerableSave"
+                label="Invulnerable Save"
+                value={sheet.invulnerableSave}
                 onChange={onChange} />
             <input
                 type="submit"
