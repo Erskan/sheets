@@ -1,4 +1,5 @@
 export default {
     sheets: [],
-    forces: []
+    forces: [],
+    ajaxCallsInProgress: 0
 };
