@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as sheetActions from '../../actions/sheetActions';
 import SheetForm from './SheetForm';
+import toastr from 'toastr';
 
 class ManageSheetPage extends React.Component {
     constructor(props, context) {
@@ -10,10 +11,12 @@ class ManageSheetPage extends React.Component {
 
         this.state = {
             sheet: Object.assign({}, props.sheet),
-            errors: {}
+            errors: {},
+            saving: false
         };
         this.updateSheetState = this.updateSheetState.bind(this);
         this.saveSheet = this.saveSheet.bind(this);
+        this.redirect = this.redirect.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -31,7 +34,18 @@ class ManageSheetPage extends React.Component {
 
     saveSheet(event) {
         event.preventDefault();
-        this.props.actions.saveSheet(this.state.sheet);
+        this.setState({saving: true});
+        this.props.actions.saveSheet(this.state.sheet)
+        .then(() => this.redirect())
+        .catch((error) => {
+            toastr.error(error);
+            this.setState({saving: false});
+        });
+    }
+
+    redirect() {
+        this.setState({saving: false});
+        toastr.success('Saved sheet!');
         this.context.router.push('/sheets');
     }
 
@@ -45,6 +59,7 @@ class ManageSheetPage extends React.Component {
                     forces={this.props.forces}
                     onChange={this.updateSheetState}
                     onSave={this.saveSheet}
+                    saving={this.state.saving}
                      />
             </div>
         );

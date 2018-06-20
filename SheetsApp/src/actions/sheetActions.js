@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 import sheetsApi from '../api/mockSheetApi';
-import { beginAjaxCall } from './ajaxStatusActions';
+import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
 
 export function loadSheetsSuccess(sheets) {
     return { type: types.LOAD_SHEETS_SUCCESS, sheets };
@@ -32,6 +32,7 @@ export function saveSheet(sheet) {
             sheet.id ? dispatch(updateSheetSuccess(savedSheet)) :
                 dispatch(createSheetSuccess(savedSheet));
         }).catch((error) => {
+            dispatch(ajaxCallError(error));
             throw(error);
         });
     };
