@@ -6,6 +6,7 @@ import AboutPage from './components/about/AboutPage';
 import SheetsPage from './components/sheet/SheetsPage';
 import ManageSheetPage from './components/sheet/ManageSheetPage';
 import ForcePage from './components/force/ForcePage';
+import ManageForcePage from './components/force/ManageForcePage';
 
 export default (
     <Route path="/" component={App}>
@@ -15,5 +16,7 @@ export default (
         <Route path="sheet" component={ManageSheetPage} />
         <Route path="sheet/:id" component={ManageSheetPage} />
         <Route path="forces" component={ForcePage} />
+        <Route path="force" component={ManageForcePage} />
+        <Route path="force/:id" component={ManageForcePage} />
     </Route>
 );

@@ -6,7 +6,6 @@ const ForceList = ({forces}) => {
         <table className="table">
             <thead>
             <tr>
-                <th>&nbsp;</th>
                 <th>Name</th>
             </tr>
             </thead>
