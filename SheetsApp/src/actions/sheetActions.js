@@ -20,6 +20,7 @@ export function loadSheets() {
         return sheetsApi.getAllSheets().then((sheets) => {
             dispatch(loadSheetsSuccess(sheets));
         }).catch((error) => {
+            dispatch(ajaxCallError(error));
             throw(error);
         });
     };
