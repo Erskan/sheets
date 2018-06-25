@@ -38,5 +38,19 @@ namespace SheetsApi.Forces
             _context.SaveChanges();
             return createdModel.Entity.ForceId;
         }
+
+        public async Task<int> DeleteAsync(int id)
+        {
+            var forceToDelete = await _context.Forces.FindAsync(id);
+            if (forceToDelete == null)
+            {
+                return -1;
+            }
+
+            var removedForce = _context.Forces.Remove(forceToDelete);
+            _context.SaveChanges();
+
+            return removedForce.Entity.ForceId;
+        }
     }
 }
