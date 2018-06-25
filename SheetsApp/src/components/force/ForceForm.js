@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import TextInput from '../common/TextInput';
+import NumberInput from '../common/NumberInput';
 
 const ForceForm = ({force, onSave, onChange, saving, errors}) => {
     return (
@@ -8,6 +9,12 @@ const ForceForm = ({force, onSave, onChange, saving, errors}) => {
                 name="name"
                 label="Name"
                 value={force.name}
+                onChange={onChange}
+                errors={errors} />
+            <NumberInput
+                name="points"
+                label="Points"
+                value={force.points}
                 onChange={onChange}
                 errors={errors} />
             <input

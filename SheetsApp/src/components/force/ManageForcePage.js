@@ -14,8 +14,8 @@ class ManageForcePage extends React.Component {
             errors: {},
             saving: false
         };
-        this.updateSheetState = this.updateForceState.bind(this);
-        this.saveSheet = this.saveSheet.bind(this);
+        this.updateForceState = this.updateForceState.bind(this);
+        this.saveForce = this.saveForce.bind(this);
         this.redirect = this.redirect.bind(this);
     }
 
@@ -29,7 +29,7 @@ class ManageForcePage extends React.Component {
         const field = event.target.name;
         let force = Object.assign({}, this.state.force);
         force[field] = event.target.value;
-        return this.setState({sheet: force});
+        return this.setState({force: force});
     }
 
     saveForce(event) {
@@ -57,7 +57,7 @@ class ManageForcePage extends React.Component {
                     force={this.state.force}
                     errors={this.state.errors}
                     onChange={this.updateForceState}
-                    onSave={this.saveSheet}
+                    onSave={this.saveForce}
                     saving={this.state.saving}
                      />
             </div>
