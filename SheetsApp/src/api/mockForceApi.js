@@ -47,8 +47,8 @@ class ForceApi {
         }
 
         if (force.id) {
-          const existingForceIndex = force.findIndex(a => a.id == force.id);
-          force.splice(existingForceIndex, 1, force);
+          const existingForceIndex = forces.findIndex(a => a.id == force.id);
+          forces.splice(existingForceIndex, 1, force);
         } else {
           force.id = generateId(force);
           forces.push(force);
