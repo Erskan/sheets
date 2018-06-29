@@ -28,7 +28,7 @@ namespace SheetsApi.Games
         public async Task<IActionResult> GetAllAsync()
         {
             Log.Information("GET games called from {RemoteIpAddress}.", HttpContext.Connection.RemoteIpAddress);
-            var games = await _gameService.GetAllAsync();
+            var games = (await _gameService.GetAllAsync()).ToList();
             if (games == null || !games.Any())
             {
                 Log.Warning("games NOT found. Returning 404.");

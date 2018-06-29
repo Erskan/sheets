@@ -27,7 +27,7 @@ namespace SheetsApi.Sheets
         public async Task<IActionResult> GetAllSheets()
         {
             Log.Information("GET sheets called from {RemoteIpAddress}.", HttpContext.Connection.RemoteIpAddress);
-            var sheets = await _sheetService.GetAllAsync();
+            var sheets = (await _sheetService.GetAllAsync()).ToList();
             if (sheets == null || !sheets.Any())
             {
                 Log.Warning("sheets NOT found. Returning 404.");

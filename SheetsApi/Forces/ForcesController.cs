@@ -27,7 +27,7 @@ namespace SheetsApi.Forces
         public async Task<IActionResult> GetAllAsync()
         {
             Log.Information("GET forces called from {RemoteIpAddress}.", HttpContext.Connection.RemoteIpAddress);
-            var forces = await _forceService.GetAllAsync();
+            var forces = (await _forceService.GetAllAsync()).ToList();
             if (forces == null || !forces.Any())
             {
                 Log.Warning("forces NOT found. Returning 404.");
