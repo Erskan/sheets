@@ -39,6 +39,7 @@ namespace SheetsApi.Settings
                 WeaponSkill = 5,
                 Weapons = new List<WeaponModel>(),
                 Wounds = 1,
+                Points = 100,
                 AddedByUser = defaultUser,
                 ModifiedByUser = defaultUser,
                 Created = DateTime.UtcNow,

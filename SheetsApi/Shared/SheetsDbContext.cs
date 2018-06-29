@@ -28,60 +28,60 @@ namespace SheetsApi.Shared
                 .HasName("PK_SheetModel_Id");
             modelBuilder.Entity<SheetModel>()
                 .Property(m => m.Created)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("date('now')");
             modelBuilder.Entity<SheetModel>()
                 .Property(m => m.Modified)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("date('now')");
             // WeaponModel
             modelBuilder.Entity<WeaponModel>()
                 .HasKey(m => m.Id)
                 .HasName("PK_WeaponModel_Id");
             modelBuilder.Entity<WeaponModel>()
                 .Property(m => m.Created)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("date('now')");
             modelBuilder.Entity<WeaponModel>()
                 .Property(m => m.Modified)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("date('now')");
             // WeaponTypeModel
             modelBuilder.Entity<WeaponTypeModel>()
                 .HasKey(m => m.Id)
                 .HasName("PK_WeaponTypeModel_Id");
             modelBuilder.Entity<WeaponTypeModel>()
                 .Property(m => m.Created)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("date('now')");
             modelBuilder.Entity<WeaponTypeModel>()
                 .Property(m => m.Modified)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("date('now')");
             // RuleModel
             modelBuilder.Entity<RuleModel>()
                 .HasKey(m => m.Id)
                 .HasName("PK_RuleModel_Id");
             modelBuilder.Entity<RuleModel>()
                 .Property(m => m.Created)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("date('now')");
             modelBuilder.Entity<RuleModel>()
                 .Property(m => m.Modified)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("date('now')");
             // ForceModel
             modelBuilder.Entity<ForceModel>()
                 .HasKey(m => m.ForceId)
                 .HasName("PK_ForceModel_Id");
             modelBuilder.Entity<ForceModel>()
                 .Property(m => m.Created)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("date('now')");
             modelBuilder.Entity<ForceModel>()
                 .Property(m => m.Modified)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("date('now')");
             // GameModel
             modelBuilder.Entity<GameModel>()
                 .HasKey(m => m.GameId)
                 .HasName("PK_GameModel_Id");
             modelBuilder.Entity<GameModel>()
                 .Property(m => m.Created)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("date('now')");
             modelBuilder.Entity<GameModel>()
                 .Property(m => m.Modified)
-                .HasDefaultValueSql("getdate()");
+                .HasDefaultValueSql("date('now')");
             // SheetsUser
             modelBuilder.Entity<SheetsUser>()
                 .HasKey(m => m.Id)

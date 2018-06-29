@@ -28,11 +28,11 @@ namespace SheetsApi.Migrations
 
                     b.Property<DateTime>("Created")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<DateTime>("Modified")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<int?>("ModifiedByUserId");
 
@@ -59,7 +59,7 @@ namespace SheetsApi.Migrations
 
                     b.Property<DateTime>("Created")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<int?>("LoserForceId");
 
@@ -67,7 +67,7 @@ namespace SheetsApi.Migrations
 
                     b.Property<DateTime>("Modified")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<int?>("ModifiedByUserId");
 
@@ -113,11 +113,11 @@ namespace SheetsApi.Migrations
 
                     b.Property<DateTime>("Created")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<DateTime>("Modified")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<int?>("ModifiedByUserId");
 
@@ -169,13 +169,13 @@ namespace SheetsApi.Migrations
 
                     b.Property<DateTime>("Created")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<int>("Damage");
 
                     b.Property<DateTime>("Modified")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<int?>("ModifiedByUserId");
 
@@ -216,11 +216,11 @@ namespace SheetsApi.Migrations
 
                     b.Property<DateTime>("Created")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<DateTime>("Modified")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<int?>("ModifiedByUserId");
 
@@ -251,7 +251,7 @@ namespace SheetsApi.Migrations
 
                     b.Property<DateTime>("Created")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<int?>("ForceModelForceId");
 
@@ -261,7 +261,7 @@ namespace SheetsApi.Migrations
 
                     b.Property<DateTime>("Modified")
                         .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("getdate()");
+                        .HasDefaultValueSql("date('now')");
 
                     b.Property<int?>("ModifiedByUserId");
 

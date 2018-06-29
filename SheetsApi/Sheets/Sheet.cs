@@ -17,6 +17,7 @@ namespace SheetsApi.Sheets
         public int Leadership { get; set; }
         public int Save { get; set; }
         public int InvulnerableSave { get; set; }
+        public int Points { get; set; }
         public IEnumerable<WeaponModel> Weapons { get; set; }
         public IEnumerable<RuleModel> Rules { get; set; }
 
