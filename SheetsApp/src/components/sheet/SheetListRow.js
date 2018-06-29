@@ -17,6 +17,7 @@ const SheetListRow = ({sheet, forces}) => {
             <td>{sheet.save}</td>
             <td>{sheet.invulnerableSave}</td>
             <td>{forces.filter(force => force.id == sheet.forceId)[0].name}</td>
+            <td>{sheet.points}</td>
         </tr>
     );
 };

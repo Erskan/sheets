@@ -19,6 +19,7 @@ const SheetList = ({sheets, forces}) => {
                 <th>Save</th>
                 <th>Invulnerable Save</th>
                 <th>Force</th>
+                <th>Points</th>
             </tr>
             </thead>
             <tbody>

@@ -69,6 +69,11 @@ const SheetForm = ({sheet, forces, onSave, onDelete, onChange, saving, deleting,
                 label="Invulnerable Save"
                 value={sheet.invulnerableSave}
                 onChange={onChange} />
+            <NumberInput
+                name="points"
+                label="Base Points Cost"
+                value={sheet.points}
+                onChange={onChange} />
             <input
                 type="submit"
                 id="sheet-form-save-button"

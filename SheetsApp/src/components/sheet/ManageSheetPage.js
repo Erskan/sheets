@@ -106,7 +106,8 @@ function createEmptySheet() {
         leadership: 0,
         save: 0,
         invulnerableSave: 0,
-        forceId: 0
+        forceId: 0,
+        points: 0
     };
 }
 
