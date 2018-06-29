@@ -12,16 +12,21 @@ class ManageSheetPage extends React.Component {
         this.state = {
             sheet: Object.assign({}, props.sheet),
             errors: {},
-            saving: false
+            saving: false,
+            deleting: false
         };
         this.updateSheetState = this.updateSheetState.bind(this);
         this.saveSheet = this.saveSheet.bind(this);
+        this.deleteSheet = this.deleteSheet.bind(this);
         this.redirect = this.redirect.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
-        if(this.props.sheet.id != nextProps.sheet.id) {
+        if(nextProps.sheet && this.props.sheet.id != nextProps.sheet.id) {
             this.setState({sheet: Object.assign({}, nextProps.sheet)});
+        }
+        else {
+            this.setState({sheet: Object.assign({}, createEmptySheet())});
         }
     }
 
@@ -43,8 +48,19 @@ class ManageSheetPage extends React.Component {
         });
     }
 
+    deleteSheet(event) {
+        event.preventDefault();
+        this.setState({deleting: true});
+        this.props.actions.deleteSheet(this.state.sheet)
+        .then(() => this.redirect())
+        .catch((error) => {
+            toastr.error(error);
+            this.setState({deleting: false});
+        });
+    }
+
     redirect() {
-        this.setState({saving: false});
+        this.setState({saving: false, deleting: false});
         toastr.success('Saved sheet!');
         this.context.router.push('/sheets');
     }
@@ -59,6 +75,7 @@ class ManageSheetPage extends React.Component {
                     forces={this.props.forces}
                     onChange={this.updateSheetState}
                     onSave={this.saveSheet}
+                    onDelete={this.deleteSheet}
                     saving={this.state.saving}
                      />
             </div>
@@ -76,18 +93,8 @@ ManageSheetPage.contextTypes = {
     router: PropTypes.object
 };
 
-function getSheetById(sheets, sheetId) {
-    const sheet = sheets.filter(s => s.id == sheetId);
-    if(sheet) {
-        return sheet[0];
-    }
-    return null;
-}
-
-function mapStateToProps(state, ownProps) {
-    const sheetId = ownProps.params.id;
-    
-    let sheet = {
+function createEmptySheet() {
+    return {
         name: "",
         movement: 0,
         weaponSkill: 0,
@@ -101,6 +108,20 @@ function mapStateToProps(state, ownProps) {
         invulnerableSave: 0,
         forceId: 0
     };
+}
+
+function getSheetById(sheets, sheetId) {
+    const sheet = sheets.filter(s => s.id == sheetId);
+    if(sheet) {
+        return sheet[0];
+    }
+    return null;
+}
+
+function mapStateToProps(state, ownProps) {
+    const sheetId = ownProps.params.id;
+    
+    let sheet = createEmptySheet();
 
     if(sheetId && state.sheets.length > 0) {
         sheet = getSheetById(state.sheets, sheetId);

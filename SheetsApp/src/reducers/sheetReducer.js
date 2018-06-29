@@ -15,6 +15,12 @@ export default function sheetReducer(state = initialState.sheets, action) {
                 ...state.filter(sheet => sheet.id != action.savedSheet.id),
                 Object.assign({}, action.savedSheet)
             ];
+        case types.DELETE_SHEET_SUCCESS:
+            return [
+                ...state.filter((sheet) => {
+                    return sheet.id != action.sheetId;
+                })
+            ];
         default:
             return state;
     }

@@ -29,9 +29,26 @@ namespace SheetsApi.Games
             return gameModel == null ? null : _mapper.Map<Game>(gameModel);
         }
 
-        public Task<int> CreateAsync(Game game)
+        public async Task<int> CreateAsync(Game game)
         {
-            throw new System.NotImplementedException();
+            var gameModel = _mapper.Map<GameModel>(game);
+            var createdModel = await _context.Games.AddAsync(gameModel);
+            _context.SaveChanges();
+            return createdModel.Entity.GameId;
+        }
+
+        public async Task<int> DeleteAsync(int id)
+        {
+            var gameToDelete = await _context.Games.FindAsync(id);
+            if (gameToDelete == null)
+            {
+                return -1;
+            }
+
+            var removedGame = _context.Games.Remove(gameToDelete);
+            _context.SaveChanges();
+
+            return removedGame.Entity.GameId;
         }
     }
 }

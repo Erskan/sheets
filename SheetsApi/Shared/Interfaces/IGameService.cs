@@ -9,5 +9,6 @@ namespace SheetsApi.Shared.Interfaces
         Task<IEnumerable<Game>> GetAllAsync();
         Task<Game> GetAsync(int id);
         Task<int> CreateAsync(Game game);
+        Task<int> DeleteAsync(int id);
     }
 }

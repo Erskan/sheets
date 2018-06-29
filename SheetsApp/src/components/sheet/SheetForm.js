@@ -3,7 +3,7 @@ import TextInput from '../common/TextInput';
 import SelectInput from '../common/SelectInput';
 import NumberInput from '../common/NumberInput';
 
-const SheetForm = ({sheet, forces, onSave, onChange, saving, errors}) => {
+const SheetForm = ({sheet, forces, onSave, onDelete, onChange, saving, deleting, errors}) => {
     return (
         <form>
             <TextInput
@@ -71,10 +71,18 @@ const SheetForm = ({sheet, forces, onSave, onChange, saving, errors}) => {
                 onChange={onChange} />
             <input
                 type="submit"
-                disabled={saving}
+                id="sheet-form-save-button"
+                disabled={saving | deleting}
                 value={saving ? 'Saving...' : 'Save'}
                 className="btn btn-primary"
                 onClick={onSave} />
+            <input
+                type="submit"
+                id="sheet-form-delete-button"
+                disabled={saving | deleting}
+                value={deleting ? 'Deleting...' : 'Delete'}
+                className="btn btn-danger"
+                onClick={onDelete} />
         </form>
     );
 };
@@ -83,8 +91,10 @@ SheetForm.propTypes = {
     sheet: PropTypes.object.isRequired,
     forces: PropTypes.array.isRequired,
     onSave: PropTypes.func.isRequired,
+    onDelete: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
     saving: PropTypes.bool.isRequired,
+    deleting: PropTypes.bool.isRequired,
     errors: PropTypes.object
 };
 

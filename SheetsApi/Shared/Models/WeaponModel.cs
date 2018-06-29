@@ -16,6 +16,7 @@ namespace SheetsApi.Shared
         public int Strength { get; set; }
         public int ArmorPenetration { get; set; }
         public int Damage { get; set; }
+        public int Points { get; set; }
         public IEnumerable<RuleModel> Rules { get; set; }
 
         public WeaponModel()
