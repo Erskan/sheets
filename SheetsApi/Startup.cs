@@ -14,6 +14,7 @@ using SheetsApi.Shared.Interfaces;
 using SheetsApi.Sheets;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.IdentityModel.Tokens;
 using SheetsApi.Forces;
 using SheetsApi.Games;
@@ -118,7 +119,10 @@ namespace SheetsApi
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sheets API v1");
             });
-
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
             app.UseMiddleware(typeof(ExceptionHandler));
             app.UseAuthentication();
 
