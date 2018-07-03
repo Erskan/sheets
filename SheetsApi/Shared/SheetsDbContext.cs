@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using SheetsApi.Forces;
 using SheetsApi.Games;
 using SheetsApi.Shared.Interfaces;
@@ -12,7 +13,10 @@ namespace SheetsApi.Shared
         public DbSet<WeaponModel> Weapons { get; set; }
         public DbSet<WeaponTypeModel> WeaponTypes { get; set; }
         public DbSet<RuleModel> Rules { get; set; }
-        public DbSet<SheetsUser> Users { get; set; }
+        public DbSet<IdentityUser<int>> Users { get; set; }
+        public DbSet<IdentityUserRole<int>> UserRoles { get; set; }
+        public DbSet<IdentityRole<int>> Roles { get; set; }
+        public DbSet<IdentityUserClaim<int>> Claims { get; set; }
         public DbSet<ForceModel> Forces { get; set; }
         public DbSet<GameModel> Games { get; set; }
 
@@ -82,10 +86,22 @@ namespace SheetsApi.Shared
             modelBuilder.Entity<GameModel>()
                 .Property(m => m.Modified)
                 .HasDefaultValueSql("date('now')");
-            // SheetsUser
-            modelBuilder.Entity<SheetsUser>()
+            // User
+            modelBuilder.Entity<IdentityUser<int>>()
                 .HasKey(m => m.Id)
                 .HasName("PK_SheetsUser_Id");
+            // Role
+            modelBuilder.Entity<IdentityRole<int>>()
+                .HasKey(m => m.Id)
+                .HasName("PK_SheetsRole_Id");
+            // Claim
+            modelBuilder.Entity<IdentityUserClaim<int>>()
+                .HasKey(m => m.Id)
+                .HasName("PK_SheetsClaim_Id");
+            // UserRoles
+            modelBuilder.Entity<IdentityUserRole<int>>()
+                .HasKey(m => m.UserId)
+                .HasName("PK_SheetsUserRoles_Id");
 
             // Mapping tables
             modelBuilder.Entity<GameForceMap>()

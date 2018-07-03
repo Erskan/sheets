@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 
 namespace SheetsApi.Shared
 {
@@ -7,10 +8,10 @@ namespace SheetsApi.Shared
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public SheetsUser AddedByUser { get; set; }
+        public IdentityUser<int> AddedByUser { get; set; }
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
-        public SheetsUser ModifiedByUser { get; set; }
+        public IdentityUser<int> ModifiedByUser { get; set; }
         public int Range { get; set; }
         public WeaponTypeModel Type { get; set; }
         public int Strength { get; set; }

@@ -11,9 +11,10 @@ using System;
 namespace SheetsApi.Migrations
 {
     [DbContext(typeof(SheetsDbContext))]
-    partial class SheetsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180703173925_AddRoles")]
+    partial class AddRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,36 +74,6 @@ namespace SheetsApi.Migrations
                         .HasName("PK_SheetsUser_Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ClaimType");
-
-                    b.Property<string>("ClaimValue");
-
-                    b.Property<int>("UserId");
-
-                    b.HasKey("Id")
-                        .HasName("PK_SheetsClaim_Id");
-
-                    b.ToTable("Claims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("RoleId");
-
-                    b.HasKey("UserId")
-                        .HasName("PK_SheetsUserRoles_Id");
-
-                    b.ToTable("UserRoles");
                 });
 
             modelBuilder.Entity("SheetsApi.Forces.ForceModel", b =>

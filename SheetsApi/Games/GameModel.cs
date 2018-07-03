@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 using SheetsApi.Forces;
 using SheetsApi.Shared;
 
@@ -9,10 +10,10 @@ namespace SheetsApi.Games
     {
         public int GameId { get; set; }
         public string Name { get; set; }
-        public SheetsUser AddedByUser { get; set; }
+        public IdentityUser<int> AddedByUser { get; set; }
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
-        public SheetsUser ModifiedByUser { get; set; }
+        public IdentityUser<int> ModifiedByUser { get; set; }
         // TODO: This is stupid. I gotta find a way to support and represent more forces for a single game.
         public ForceModel Winner { get; set; }
         public ForceModel Loser { get; set; }

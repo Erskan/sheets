@@ -3,26 +3,36 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using SheetsApi.Middleware;
+using SheetsApi.Shared;
 
 namespace SheetsApi.Login
 {
     [Route("login")]
     public class LoginController : Controller
     {
+        private readonly SignInManager<IdentityUser<int>> _signInManager;
         private readonly JwtIssuerOptions _jwtOptions;
-        public LoginController(IOptions<JwtIssuerOptions> jwtOptions)
+        public LoginController(IOptions<JwtIssuerOptions> jwtOptions, SignInManager<IdentityUser<int>> signInManager)
         {
+            _signInManager = signInManager;
             _jwtOptions = jwtOptions.Value;
-            
         }
 
         [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginRequest loginRequest)
         {
+            var signInResult = await _signInManager.PasswordSignInAsync(loginRequest.Username, loginRequest.Secret, false, false);
+
+            if (!signInResult.Succeeded)
+            {
+                return Unauthorized();
+            }
+
             var claims = new[]
             {
                 new Claim(JwtRegisteredClaimNames.Sub, loginRequest.Username),

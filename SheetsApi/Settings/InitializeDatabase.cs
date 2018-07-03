@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 using SheetsApi.Shared;
 using SheetsApi.Sheets;
 
@@ -8,7 +9,7 @@ namespace SheetsApi.Settings
 {
     public static class InitializeDatabase
     {
-        public static void Init(SheetsDbContext context)
+        public static async System.Threading.Tasks.Task InitAsync(SheetsDbContext context, UserManager<IdentityUser<int>> userManager)
         {
             if (context.Sheets.Any() || context.Users.Any())
             {
@@ -16,12 +17,11 @@ namespace SheetsApi.Settings
                 return;
             }
 
-            var defaultUser = new SheetsUser
+            var userCreationResult = await userManager.CreateAsync(new IdentityUser<int>("admin")
             {
-                Id = 1,
-                Name = "Default User"
-            };
-            context.Users.Add(defaultUser);
+                Email = "admin@whark.net"
+            }, "secret");
+            context.SaveChanges();
 
             var defaultSheet = new SheetModel
             {
@@ -40,8 +40,8 @@ namespace SheetsApi.Settings
                 Weapons = new List<WeaponModel>(),
                 Wounds = 1,
                 Points = 100,
-                AddedByUser = defaultUser,
-                ModifiedByUser = defaultUser,
+                AddedByUser = context.Users.First(),
+                ModifiedByUser = context.Users.First(),
                 Created = DateTime.UtcNow,
                 Modified = DateTime.UtcNow
             };

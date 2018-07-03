@@ -11,99 +11,14 @@ using System;
 namespace SheetsApi.Migrations
 {
     [DbContext(typeof(SheetsDbContext))]
-    partial class SheetsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180703170431_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026");
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ConcurrencyStamp");
-
-                    b.Property<string>("Name");
-
-                    b.Property<string>("NormalizedName");
-
-                    b.HasKey("Id")
-                        .HasName("PK_SheetsRole_Id");
-
-                    b.ToTable("Roles");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccessFailedCount");
-
-                    b.Property<string>("ConcurrencyStamp");
-
-                    b.Property<string>("Email");
-
-                    b.Property<bool>("EmailConfirmed");
-
-                    b.Property<bool>("LockoutEnabled");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("NormalizedEmail");
-
-                    b.Property<string>("NormalizedUserName");
-
-                    b.Property<string>("PasswordHash");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<bool>("PhoneNumberConfirmed");
-
-                    b.Property<string>("SecurityStamp");
-
-                    b.Property<bool>("TwoFactorEnabled");
-
-                    b.Property<string>("UserName");
-
-                    b.HasKey("Id")
-                        .HasName("PK_SheetsUser_Id");
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ClaimType");
-
-                    b.Property<string>("ClaimValue");
-
-                    b.Property<int>("UserId");
-
-                    b.HasKey("Id")
-                        .HasName("PK_SheetsClaim_Id");
-
-                    b.ToTable("Claims");
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
-                {
-                    b.Property<int>("UserId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("RoleId");
-
-                    b.HasKey("UserId")
-                        .HasName("PK_SheetsUserRoles_Id");
-
-                    b.ToTable("UserRoles");
-                });
 
             modelBuilder.Entity("SheetsApi.Forces.ForceModel", b =>
                 {
@@ -229,6 +144,45 @@ namespace SheetsApi.Migrations
                     b.HasIndex("WeaponModelId");
 
                     b.ToTable("Rules");
+                });
+
+            modelBuilder.Entity("SheetsApi.Shared.SheetsUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AccessFailedCount");
+
+                    b.Property<string>("ConcurrencyStamp");
+
+                    b.Property<string>("Email");
+
+                    b.Property<bool>("EmailConfirmed");
+
+                    b.Property<bool>("LockoutEnabled");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("NormalizedEmail");
+
+                    b.Property<string>("NormalizedUserName");
+
+                    b.Property<string>("PasswordHash");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.Property<bool>("PhoneNumberConfirmed");
+
+                    b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("TwoFactorEnabled");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("Id")
+                        .HasName("PK_SheetsUser_Id");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("SheetsApi.Shared.WeaponModel", b =>
@@ -368,18 +322,18 @@ namespace SheetsApi.Migrations
 
             modelBuilder.Entity("SheetsApi.Forces.ForceModel", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<int>", "AddedByUser")
+                    b.HasOne("SheetsApi.Shared.SheetsUser", "AddedByUser")
                         .WithMany()
                         .HasForeignKey("AddedByUserId");
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<int>", "ModifiedByUser")
+                    b.HasOne("SheetsApi.Shared.SheetsUser", "ModifiedByUser")
                         .WithMany()
                         .HasForeignKey("ModifiedByUserId");
                 });
 
             modelBuilder.Entity("SheetsApi.Games.GameModel", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<int>", "AddedByUser")
+                    b.HasOne("SheetsApi.Shared.SheetsUser", "AddedByUser")
                         .WithMany()
                         .HasForeignKey("AddedByUserId");
 
@@ -387,7 +341,7 @@ namespace SheetsApi.Migrations
                         .WithMany()
                         .HasForeignKey("LoserForceId");
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<int>", "ModifiedByUser")
+                    b.HasOne("SheetsApi.Shared.SheetsUser", "ModifiedByUser")
                         .WithMany()
                         .HasForeignKey("ModifiedByUserId");
 
@@ -411,11 +365,11 @@ namespace SheetsApi.Migrations
 
             modelBuilder.Entity("SheetsApi.Shared.RuleModel", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<int>", "AddedByUser")
+                    b.HasOne("SheetsApi.Shared.SheetsUser", "AddedByUser")
                         .WithMany()
                         .HasForeignKey("AddedByUserId");
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<int>", "ModifiedByUser")
+                    b.HasOne("SheetsApi.Shared.SheetsUser", "ModifiedByUser")
                         .WithMany()
                         .HasForeignKey("ModifiedByUserId");
 
@@ -430,11 +384,11 @@ namespace SheetsApi.Migrations
 
             modelBuilder.Entity("SheetsApi.Shared.WeaponModel", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<int>", "AddedByUser")
+                    b.HasOne("SheetsApi.Shared.SheetsUser", "AddedByUser")
                         .WithMany()
                         .HasForeignKey("AddedByUserId");
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<int>", "ModifiedByUser")
+                    b.HasOne("SheetsApi.Shared.SheetsUser", "ModifiedByUser")
                         .WithMany()
                         .HasForeignKey("ModifiedByUserId");
 
@@ -449,18 +403,18 @@ namespace SheetsApi.Migrations
 
             modelBuilder.Entity("SheetsApi.Shared.WeaponTypeModel", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<int>", "AddedByUser")
+                    b.HasOne("SheetsApi.Shared.SheetsUser", "AddedByUser")
                         .WithMany()
                         .HasForeignKey("AddedByUserId");
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<int>", "ModifiedByUser")
+                    b.HasOne("SheetsApi.Shared.SheetsUser", "ModifiedByUser")
                         .WithMany()
                         .HasForeignKey("ModifiedByUserId");
                 });
 
             modelBuilder.Entity("SheetsApi.Sheets.SheetModel", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<int>", "AddedByUser")
+                    b.HasOne("SheetsApi.Shared.SheetsUser", "AddedByUser")
                         .WithMany()
                         .HasForeignKey("AddedByUserId");
 
@@ -468,7 +422,7 @@ namespace SheetsApi.Migrations
                         .WithMany("Sheets")
                         .HasForeignKey("ForceModelForceId");
 
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser<int>", "ModifiedByUser")
+                    b.HasOne("SheetsApi.Shared.SheetsUser", "ModifiedByUser")
                         .WithMany()
                         .HasForeignKey("ModifiedByUserId");
                 });
