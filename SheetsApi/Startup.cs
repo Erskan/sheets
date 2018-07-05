@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -139,7 +140,7 @@ namespace SheetsApi
 
             // Run migration and seed if needed.
             db.Database.Migrate();
-            InitializeDatabase.InitAsync(db, userManager);
+            Task.Run(() => InitializeDatabase.InitAsync(db, userManager));
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>

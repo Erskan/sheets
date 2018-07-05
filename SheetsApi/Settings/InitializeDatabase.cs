@@ -21,11 +21,9 @@ namespace SheetsApi.Settings
             {
                 Email = "admin@whark.net"
             }, "secret");
-            context.SaveChanges();
 
             var defaultSheet = new SheetModel
             {
-                SheetId = 1,
                 Attacks = 2,
                 BallisticSkill = 4,
                 InvulnerableSave = 0,
@@ -46,6 +44,7 @@ namespace SheetsApi.Settings
                 Modified = DateTime.UtcNow
             };
             context.Sheets.Add(defaultSheet);
+            context.SaveChanges();
         }
     }
 }
