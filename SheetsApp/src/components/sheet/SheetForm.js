@@ -11,69 +11,81 @@ const SheetForm = ({sheet, forces, onSave, onDelete, onChange, saving, deleting,
                 label="Name"
                 value={sheet.name}
                 onChange={onChange}
-                errors={errors} />
+                error={errors.name} />
             <SelectInput
                 name="forceId"
                 label="Force"
                 value={sheet.forceId}
                 defaultOption="Select Force"
                 options={forces}
-                onChange={onChange} />
+                onChange={onChange}
+                error={errors.forceId} />
             <NumberInput
                 name="movement"
                 label="Movement"
                 value={sheet.movement}
-                onChange={onChange} />
+                onChange={onChange}
+                error={errors.movement} />
             <NumberInput
                 name="weaponSkill"
                 label="Weapon Skill"
                 value={sheet.weaponSkill}
-                onChange={onChange} />
+                onChange={onChange}
+                error={errors.weaponSkill} />
             <NumberInput
                 name="ballisticSkill"
                 label="Ballistic Skill"
                 value={sheet.ballisticSkill}
-                onChange={onChange} />
+                onChange={onChange}
+                error={errors.ballisticSkill} />
             <NumberInput
                 name="strength"
                 label="Strength"
                 value={sheet.strength}
-                onChange={onChange} />
+                onChange={onChange}
+                error={errors.strength} />
             <NumberInput
                 name="toughness"
                 label="Toughness"
                 value={sheet.toughness}
-                onChange={onChange} />
+                onChange={onChange}
+                error={errors.toughness} />
             <NumberInput
                 name="wounds"
                 label="Wounds"
                 value={sheet.wounds}
-                onChange={onChange} />
+                onChange={onChange}
+                error={errors.wounds} />
             <NumberInput
                 name="attacks"
                 label="Attacks"
                 value={sheet.attacks}
-                onChange={onChange} />
+                onChange={onChange}
+                error={errors.attacks} />
             <NumberInput
                 name="leadership"
                 label="Leadership"
                 value={sheet.leadership}
-                onChange={onChange} />
+                onChange={onChange}
+                error={errors.leadership} />
             <NumberInput
                 name="save"
                 label="Save"
                 value={sheet.save}
-                onChange={onChange} />
+                onChange={onChange}
+                error={errors.save} />
             <NumberInput
                 name="invulnerableSave"
                 label="Invulnerable Save"
                 value={sheet.invulnerableSave}
-                onChange={onChange} />
+                onChange={onChange}
+                error={errors.invulnerableSave} />
             <NumberInput
                 name="points"
                 label="Base Points Cost"
                 value={sheet.points}
-                onChange={onChange} />
+                onChange={onChange}
+                error={errors.points} />
             <input
                 type="submit"
                 id="sheet-form-save-button"

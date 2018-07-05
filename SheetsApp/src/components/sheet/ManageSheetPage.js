@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as sheetActions from '../../actions/sheetActions';
 import SheetForm from './SheetForm';
+import { forcesFormattedForSelect } from '../../selectors/selectors';
 import toastr from 'toastr';
 
-class ManageSheetPage extends React.Component {
+export class ManageSheetPage extends React.Component {
     constructor(props, context) {
         super(props, context);
 
@@ -37,8 +38,56 @@ class ManageSheetPage extends React.Component {
         return this.setState({sheet: sheet});
     }
 
+    sheetFormIsValid() {
+        let sheetFormIsValid = true;
+        let errors = {};
+
+        if(this.state.sheet.name.length < 1) {
+            errors.name = 'Name cannot be empty.';
+            sheetFormIsValid = false;
+        }
+        
+        if(this.state.sheet.weaponSkill <= 1 || this.state.sheet.weaponSkill > 6) {
+            errors.weaponSkill = 'Weapon skill value must be minimum 2 and maximum 6.';
+            sheetFormIsValid = false;
+        }
+        
+        if(this.state.sheet.ballisticSkill <= 1 || this.state.sheet.ballisticSkill > 6) {
+            errors.ballisticSkill = 'Ballistic skill value must be minimum 2 and maximum 6.';
+            sheetFormIsValid = false;
+        }
+        
+        if(this.state.sheet.movement <= 0) {
+            errors.movement = 'Movement value needs to be larger than 0.';
+            sheetFormIsValid = false;
+        }
+        
+        if(this.state.sheet.attacks <= 0) {
+            errors.attacks = 'Attacks value needs to be larger than 0.';
+            sheetFormIsValid = false;
+        }
+        
+        if(this.state.sheet.save == 1 || this.state.sheet.save < 0) {
+            errors.save = 'Save must be larger than 1. For no save -> set to 0.';
+            sheetFormIsValid = false;
+        }
+        
+        if(this.state.sheet.invulnerableSave == 1 || this.state.sheet.invulnerableSave < 0) {
+            errors.invulnerableSave = 'Invulnerable save must be larger than 1. For no inv. save -> set to 0.';
+            sheetFormIsValid = false;
+        }
+
+        this.setState({errors: errors});
+        return sheetFormIsValid;
+    }
+
     saveSheet(event) {
         event.preventDefault();
+
+        if(!this.sheetFormIsValid()) {
+            return;
+        }
+
         this.setState({saving: true});
         this.props.actions.saveSheet(this.state.sheet)
         .then(() => this.redirect())
@@ -128,15 +177,9 @@ function mapStateToProps(state, ownProps) {
         sheet = getSheetById(state.sheets, sheetId);
     }
 
-    const forcesFormattedForSelect = state.forces.map((force) => {
-        return {
-            value: force.id,
-            text: force.name
-        };
-    });
     return {
         sheet: sheet,
-        forces: forcesFormattedForSelect
+        forces: forcesFormattedForSelect(state.forces)
     };
 }
 
