@@ -4,7 +4,7 @@ import App from './components/App';
 import HomePage from './components/home/HomePage';
 import AboutPage from './components/about/AboutPage';
 import SheetsPage from './components/sheet/SheetsPage';
-import ManageSheetPage from './components/sheet/ManageSheetPage';
+import ManageSheetPage from './components/sheet/ManageSheetPage'; //eslint-disable-line import/no-named-as-default
 import ForcePage from './components/force/ForcePage';
 import ManageForcePage from './components/force/ManageForcePage';
 
