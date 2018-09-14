@@ -14,7 +14,10 @@ namespace SheetsApi.Games
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
         public IdentityUser<int> ModifiedByUser { get; set; }
-        // TODO: This is stupid. I gotta find a way to support and represent more forces for a single game.
+        /* TODO: Consider the concept of "Combatant" or something similar.
+         *  A Combatant would then have a series of relations and a score to start with. Force and Game relation. Score just a value.
+         *  Determining winner/loser becomes trivial and data model makes more sense.
+        */
         public ForceModel Winner { get; set; }
         public ForceModel Loser { get; set; }
         public int? WinnerScore { get; set; }
