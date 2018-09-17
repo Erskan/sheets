@@ -38,6 +38,7 @@ namespace SheetsApi.Settings
                 Weapons = new List<WeaponModel>(),
                 Wounds = 1,
                 Points = 100,
+                Max = 10,
                 AddedByUser = context.Users.First(),
                 ModifiedByUser = context.Users.First(),
                 Created = DateTime.UtcNow,
