@@ -19,6 +19,7 @@ namespace SheetsApi.Shared
         public DbSet<IdentityUserClaim<int>> Claims { get; set; }
         public DbSet<ForceModel> Forces { get; set; }
         public DbSet<GameModel> Games { get; set; }
+        public DbSet<CombatantModel> Combatants { get; set; }
 
         public SheetsDbContext(DbContextOptions<SheetsDbContext> options) : base(options)
         {
@@ -86,6 +87,20 @@ namespace SheetsApi.Shared
             modelBuilder.Entity<GameModel>()
                 .Property(m => m.Modified)
                 .HasDefaultValueSql("date('now')");
+            // CombatantModel
+            modelBuilder.Entity<CombatantModel>()
+                .HasKey(m => m.CombatantId)
+                .HasName("PK_CombatantModel_Id");
+            modelBuilder.Entity<CombatantModel>()
+                .Property(m => m.Created)
+                .HasDefaultValueSql("date('now')");
+            modelBuilder.Entity<CombatantModel>()
+                .Property(m => m.Modified)
+                .HasDefaultValueSql("date('now')");
+            modelBuilder.Entity<CombatantModel>()
+                .HasOne(typeof(ForceModel));
+            modelBuilder.Entity<CombatantModel>()
+                .HasOne(typeof(GameModel));
             // User
             modelBuilder.Entity<IdentityUser<int>>()
                 .HasKey(m => m.Id)
