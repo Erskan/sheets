@@ -127,9 +127,11 @@ namespace SheetsApi.Forces
             var result = await _forceService.AddSheetAsync(forceId, sheetId);
             if (result <= 0)
             {
+                Log.Error("Could not add sheet {sheetId} to force {forceId}", sheetId, forceId);
                 return StatusCode(500);
             }
 
+            Log.Information("Sheet {sheetId} added to force {forceId}", sheetId, forceId);
             return Created(String.Empty, result);
         }
     }

@@ -8,13 +8,13 @@ namespace SheetsApi.Forces
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public IEnumerable<Sheet> Sheets { get; set; }
-        public IEnumerable<Game> Games { get; set; }
+        public IEnumerable<int> Sheets { get; set; }
+        public IEnumerable<int> Games { get; set; }
 
         public Force()
         {
-            Sheets = new List<Sheet>();
-            Games = new List<Game>();
+            Sheets = new List<int>();
+            Games = new List<int>();
         }
     }
 }

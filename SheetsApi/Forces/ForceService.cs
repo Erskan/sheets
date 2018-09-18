@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using SheetsApi.Shared.Interfaces;
+using SheetsApi.Sheets;
 
 namespace SheetsApi.Forces
 {
@@ -53,17 +54,25 @@ namespace SheetsApi.Forces
             return removedForce.Entity.ForceId;
         }
 
-        public async Task<int> AddSheetAsync(int sheetId)
+        public async Task<int> AddSheetAsync(int sheetId, int forceId)
         {
             var sheet = await _context.Sheets.FindAsync(sheetId);
-            var force = await _context.Forces.Fin
+            var force = await _context.Forces.FindAsync(forceId);
 
-            if (sheet == null)
+            if (sheet == null || force == null)
             {
                 return -1;
             }
 
+            var sheetAsEnumerable = new List<SheetModel>()
+            {
+                sheet
+            };
+            force.Sheets = force.Sheets.Union(sheetAsEnumerable);
+            _context.Forces.Update(force);
+            _context.SaveChanges();
 
+            return sheet.SheetId;
         }
     }
 }
