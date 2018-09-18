@@ -10,5 +10,6 @@ namespace SheetsApi.Shared.Interfaces
         Task<Force> GetAsync(int id);
         Task<int> CreateAsync(Force force);
         Task<int> DeleteAsync(int id);
+        Task<int> AddSheetAsync(int forceId, int sheetId);
     }
 }

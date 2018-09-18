@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Data.Common;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using SheetsApi.Shared;
 using SheetsApi.Shared.Interfaces;
 using System.Threading.Tasks;
 

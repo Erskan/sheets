@@ -114,5 +114,23 @@ namespace SheetsApi.Forces
             Log.Information("Force with id {removedId} was deleted from the database.", removedId);
             return Ok(id);
         }
+
+        [HttpPut("{forceId}/sheets/{sheetId}")]
+        public async Task<IActionResult> AddSheetAsync(int forceId, int sheetId)
+        {
+            Log.Information("PUT forces/{forceId}/sheets/{sheetId} called from {RemoteIpAddress}.", forceId, sheetId, HttpContext.Connection.RemoteIpAddress);
+            if (sheetId <= 0)
+            {
+                return StatusCode(400, "Supplied id is lesser than or equal to zero(0).");
+            }
+
+            var result = await _forceService.AddSheetAsync(forceId, sheetId);
+            if (result <= 0)
+            {
+                return StatusCode(500);
+            }
+
+            return Created(String.Empty, result);
+        }
     }
 }

@@ -52,5 +52,18 @@ namespace SheetsApi.Forces
 
             return removedForce.Entity.ForceId;
         }
+
+        public async Task<int> AddSheetAsync(int sheetId)
+        {
+            var sheet = await _context.Sheets.FindAsync(sheetId);
+            var force = await _context.Forces.Fin
+
+            if (sheet == null)
+            {
+                return -1;
+            }
+
+
+        }
     }
 }

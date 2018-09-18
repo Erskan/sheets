@@ -21,6 +21,8 @@ namespace SheetsApi.Settings
                 .ForMember(m => m.Id, a => a.MapFrom(s => s.ForceId));
             CreateMap<GameModel, Game>()
                 .ForMember(m => m.Id, a => a.MapFrom(s => s.GameId));
+            CreateMap<CombatantModel, Combatant>()
+                .ForMember(m => m.Id, a => a.MapFrom(s => s.CombatantId));
         }
     }
 }
