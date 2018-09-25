@@ -19,13 +19,13 @@ namespace SheetsApi.Sheets
         public int InvulnerableSave { get; set; }
         public int Points { get; set; }
         public int Max { get; set; }
-        public IEnumerable<WeaponModel> Weapons { get; set; }
-        public IEnumerable<RuleModel> Rules { get; set; }
+        public IEnumerable<Weapon> Weapons { get; set; }
+        public IEnumerable<Rule> Rules { get; set; }
 
         public Sheet()
         {
-            Weapons = new List<WeaponModel>();
-            Rules = new List<RuleModel>();
+            Weapons = new List<Weapon>();
+            Rules = new List<Rule>();
         }
     }
 }

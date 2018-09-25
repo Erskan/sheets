@@ -131,7 +131,7 @@ namespace SheetsApi
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
         }
         
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SheetsDbContext db, UserManager<IdentityUser<int>> userManager)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SheetsDbContext db)
         {
             if (env.IsDevelopment())
             {
@@ -140,7 +140,6 @@ namespace SheetsApi
 
             // Run migration and seed if needed.
             db.Database.Migrate();
-            Task.Run(() => InitializeDatabase.InitAsync(db, userManager));
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>

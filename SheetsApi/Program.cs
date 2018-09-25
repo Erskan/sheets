@@ -21,12 +21,26 @@ namespace SheetsApi
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                 .Enrich.FromLogContext()
                 .WriteTo.Console()
-                .WriteTo.RollingFile("log-{Date}.txt")
+                .WriteTo.RollingFile("log-sheetsapi-{Date}.txt")
                 .CreateLogger();
             try
             {
                 Log.Information("Starting Sheets API application...");
                 var host = BuildWebHost(args);
+                using (var scope = host.Services.CreateScope())
+                {
+                    var services = scope.ServiceProvider;
+                    try
+                    {
+                        var context = services.GetRequiredService<SheetsDbContext>();
+                        var userManager = services.GetRequiredService<UserManager<IdentityUser<int>>>();
+                        InitializeDatabase.InitAsync(context, userManager).GetAwaiter().GetResult();
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex, "An error occurred while seeding the database.");
+                    }
+                }
                 host.Run();
             }
             catch(Exception ex)
@@ -38,6 +52,7 @@ namespace SheetsApi
             {
                 Log.CloseAndFlush();
             }
+            Log.Information("Sheets API shutting down...");
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

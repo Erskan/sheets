@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Serilog;
+using SheetsApi.Forces;
 using SheetsApi.Shared;
 using SheetsApi.Sheets;
 
@@ -11,7 +14,7 @@ namespace SheetsApi.Settings
     {
         public static async System.Threading.Tasks.Task InitAsync(SheetsDbContext context, UserManager<IdentityUser<int>> userManager)
         {
-            if (context.Sheets.Any() || context.Users.Any())
+            if (await context.Sheets.AnyAsync() || await context.Users.AnyAsync())
             {
                 // Don't seed if data exists in the DB.
                 return;
@@ -21,6 +24,8 @@ namespace SheetsApi.Settings
             {
                 Email = "admin@whark.net"
             }, "secret");
+
+            var user = await context.Users.OrderBy(u => u.Id).FirstAsync();
 
             var defaultSheet = new SheetModel
             {
@@ -39,13 +44,28 @@ namespace SheetsApi.Settings
                 Wounds = 1,
                 Points = 100,
                 Max = 10,
-                AddedByUser = context.Users.First(),
-                ModifiedByUser = context.Users.First(),
+                AddedByUser = user,
+                ModifiedByUser = user,
                 Created = DateTime.UtcNow,
                 Modified = DateTime.UtcNow
             };
-            context.Sheets.Add(defaultSheet);
-            context.SaveChanges();
+            var defaultForce = new ForceModel
+            {
+                Name = "Test Force One",
+                AddedByUser = user,
+                ModifiedByUser = user,
+                Sheets = new List<SheetModel> {defaultSheet}
+            };
+            try
+            {
+                await context.Sheets.AddAsync(defaultSheet);
+                await context.Forces.AddAsync(defaultForce);
+                await context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+            }
         }
     }
 }

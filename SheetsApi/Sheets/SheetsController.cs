@@ -89,7 +89,7 @@ namespace SheetsApi.Sheets
         [SwaggerResponse(400, typeof(IEnumerable<FluentValidation.Results.ValidationFailure>))]
         [SwaggerResponse(401)]
         [SwaggerResponse(500)]
-        public async Task<IActionResult> UpdateSheet([FromBody] Sheet sheet)
+        public IActionResult UpdateSheet([FromBody] Sheet sheet)
         {
             Log.Information("PUT sheets/ called from {RemoteIpAddress}.", HttpContext.Connection.RemoteIpAddress);
             if (sheet == null)
