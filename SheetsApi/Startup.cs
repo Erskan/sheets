@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,10 +15,11 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using SheetsApi.Forces;
 using SheetsApi.Games;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace SheetsApi
 {
@@ -47,19 +46,31 @@ namespace SheetsApi
             }));
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = "Sheets API", Version = "v1" });
-                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                c.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
                 {
                     Description = "JWT auth with bearer tokens.",
                     Name = "Authorization",
-                    In = "header",
-                    Type = "apiKey"
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
                 });
-                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     {
-                        "Bearer", new string[] { }
-                    },
+                        new OpenApiSecurityScheme{
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "bearer"
+                            }},
+                        new string[] {}
+                    }
+                });
+
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "whark api",
+                    Description = "Internal Version 0.0.1"
                 });
             });
             services.AddDbContext<SheetsDbContext>(options => options.UseSqlite(Configuration.GetConnectionString("Sqlite")));
@@ -131,12 +142,14 @@ namespace SheetsApi
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
         }
         
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SheetsDbContext db)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SheetsDbContext db)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseRouting();
 
             // Run migration and seed if needed.
             db.Database.Migrate();
@@ -144,7 +157,7 @@ namespace SheetsApi
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Sheets API v1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "whark API v1");
             });
             app.UseForwardedHeaders(new ForwardedHeadersOptions
             {
@@ -153,7 +166,7 @@ namespace SheetsApi
             app.UseMiddleware(typeof(ExceptionHandler));
             app.UseAuthentication();
 
-            app.UseMvc();
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }
 }

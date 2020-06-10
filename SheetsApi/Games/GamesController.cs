@@ -21,10 +21,10 @@ namespace SheetsApi.Games
         }
 
         [HttpGet]
-        [SwaggerResponse(200, typeof(IEnumerable<Game>))]
-        [SwaggerResponse(400)]
-        [SwaggerResponse(401)]
-        [SwaggerResponse(500)]
+        [ProducesResponseType(typeof(IEnumerable<Game>), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public async Task<IActionResult> GetAllAsync()
         {
             Log.Information("GET games called from {RemoteIpAddress}.", HttpContext.Connection.RemoteIpAddress);
@@ -41,11 +41,11 @@ namespace SheetsApi.Games
         }
 
         [HttpGet("{id}")]
-        [SwaggerResponse(200, typeof(Game))]
-        [SwaggerResponse(400)]
-        [SwaggerResponse(401)]
-        [SwaggerResponse(404)]
-        [SwaggerResponse(500)]
+        [ProducesResponseType(typeof(Game), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(404)]
+        [ProducesResponseType(500)]
         public async Task<IActionResult> GetAsync(int id)
         {
             Log.Information("GET games/{id} called from {RemoteIpAddress}.", id, HttpContext.Connection.RemoteIpAddress);
@@ -66,10 +66,10 @@ namespace SheetsApi.Games
         }
 
         [HttpPost]
-        [SwaggerResponse(201, typeof(int))]
-        [SwaggerResponse(400)]
-        [SwaggerResponse(401)]
-        [SwaggerResponse(500)]
+        [ProducesResponseType(typeof(int), 201)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public async Task<IActionResult> CreateAsync([FromBody] Game game)
         {
             Log.Information("POST games/ called from {RemoteIpAddress}.", HttpContext.Connection.RemoteIpAddress);
@@ -92,10 +92,10 @@ namespace SheetsApi.Games
             return Created($"Successfully created new game with id {id}", id);
         }
         [HttpDelete("{id}")]
-        [SwaggerResponse(200, typeof(int))]
-        [SwaggerResponse(400, typeof(string))]
-        [SwaggerResponse(401)]
-        [SwaggerResponse(500)]
+        [ProducesResponseType(typeof(int), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
         public async Task<IActionResult> DeleteGame(int id)
         {
             Log.Information("DELETE games/{id} called from {RemoteIpAddress}.", HttpContext.Connection.RemoteIpAddress, id);

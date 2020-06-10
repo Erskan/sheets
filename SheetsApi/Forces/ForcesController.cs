@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using SheetsApi.Shared.Interfaces;
 using Serilog;
 using System.Linq;
+using Microsoft.AspNetCore.Http;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace SheetsApi.Forces
@@ -19,11 +20,11 @@ namespace SheetsApi.Forces
         {
             _forceService = forceService;
         }
+
         [HttpGet]
-        [SwaggerResponse(200, typeof(IEnumerable<Force>))]
-        [SwaggerResponse(400)]
-        [SwaggerResponse(401)]
-        [SwaggerResponse(500)]
+        [ProducesResponseType(typeof(IEnumerable<Force>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetAllAsync()
         {
             Log.Information("GET forces called from {RemoteIpAddress}.", HttpContext.Connection.RemoteIpAddress);
@@ -40,11 +41,10 @@ namespace SheetsApi.Forces
         }
 
         [HttpGet("{id}")]
-        [SwaggerResponse(200, typeof(Force))]
-        [SwaggerResponse(400)]
-        [SwaggerResponse(401)]
-        [SwaggerResponse(404)]
-        [SwaggerResponse(500)]
+        [ProducesResponseType(typeof(Force), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetAsync(int id)
         {
             Log.Information("GET forces/{id} called from {RemoteIpAddress}.", id, HttpContext.Connection.RemoteIpAddress);
@@ -65,10 +65,10 @@ namespace SheetsApi.Forces
         }
 
         [HttpPost]
-        [SwaggerResponse(201, typeof(int))]
-        [SwaggerResponse(400)]
-        [SwaggerResponse(401)]
-        [SwaggerResponse(500)]
+        [ProducesResponseType(typeof(int), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> CreateForce([FromBody] Force force)
         {
             Log.Information("POST forces/ called from {RemoteIpAddress}.", HttpContext.Connection.RemoteIpAddress);
@@ -92,10 +92,10 @@ namespace SheetsApi.Forces
         }
 
         [HttpDelete("{id}")]
-        [SwaggerResponse(200, typeof(int))]
-        [SwaggerResponse(400, typeof(string))]
-        [SwaggerResponse(401)]
-        [SwaggerResponse(500)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteForce(int id)
         {
             Log.Information("DELETE forces/{id} called from {RemoteIpAddress}.", HttpContext.Connection.RemoteIpAddress, id);
@@ -112,7 +112,7 @@ namespace SheetsApi.Forces
             }
 
             Log.Information("Force with id {removedId} was deleted from the database.", removedId);
-            return Ok(id);
+            return NoContent();
         }
 
         [HttpPut("{forceId}/sheets/{sheetId}")]

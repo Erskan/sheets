@@ -1,5 +1,5 @@
 {
-  "name": "Sheets",
+  "name": "whark",
   "version": "1.0.0",
   "description": "WH40k force and game tracker",
   "scripts": {
@@ -21,7 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^3.4.1",
     "jquery": "^2.2.4",
     "prop-types": "^15.6.2",
     "react": "^15.6.2",

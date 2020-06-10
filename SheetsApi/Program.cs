@@ -3,9 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Serilog;
 using Serilog.Events;
 using System;
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SheetsApi.Settings;
 using SheetsApi.Shared;
@@ -50,9 +48,9 @@ namespace SheetsApi
             }
             finally
             {
+                Log.Information("Sheets API shutting down...");
                 Log.CloseAndFlush();
             }
-            Log.Information("Sheets API shutting down...");
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
